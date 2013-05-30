@@ -1,4 +1,4 @@
-alias ls="ls -AlG"
+alias ls="ls -AlG --color=auto"
 export PS1='\[\033[01;32m\]\u:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
