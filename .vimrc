@@ -26,10 +26,9 @@ function! SetTab(width)
 endfunction
 call SetTab(2) " defaults
 
-au BufNewFile,BufRead *.go set filetype=go
-
+au BufNewFile,BufRead BUILD set filetype=build
+autocmd Filetype build call SetTab(4)
 autocmd Filetype make setlocal noexpandtab
-autocmd FileType java call SetTab(4)
 
 " disable arrow keys
 nnoremap <up> <nop>
@@ -47,4 +46,5 @@ nnoremap ; :CtrlPBuffer<CR>
 nnoremap \e :NERDTreeToggle<CR>
 
 " Go
+au BufNewFile,BufRead *.go set filetype=go
 set rtp+=$GOROOT/misc/vim
