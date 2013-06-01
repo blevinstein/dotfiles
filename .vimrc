@@ -48,3 +48,9 @@ nnoremap \e :NERDTreeToggle<CR>
 " Go
 au BufNewFile,BufRead *.go set filetype=go
 set rtp+=$GOROOT/misc/vim
+
+" Google
+source /usr/share/vim/google/google.vim
+
+" YCM
+let g:ycm_confirm_extra_conf = 0
