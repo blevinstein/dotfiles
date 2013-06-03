@@ -40,8 +40,6 @@ set t_Co=256 " iTerm2 256-color mode
 
 " Pathogen
 execute pathogen#infect()
-" Ctrl-P
-nnoremap ; :CtrlPBuffer<CR>
 " NERD Tree
 nnoremap \e :NERDTreeToggle<CR>
 
