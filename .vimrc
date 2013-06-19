@@ -17,7 +17,21 @@ set smartcase
 set smarttab
 set expandtab
 
+" au = autocmd
+
 filetype plugin indent on
+
+" set leader
+let mapleader = ','
+let g:mapleader = ','
+
+" set encoding and standard filetypes
+set encoding=utf8
+
+" disable backup
+set nobackup
+set nowb
+set noswapfile
 
 function! SetTab(width)
   let &l:softtabstop = a:width
@@ -26,7 +40,7 @@ function! SetTab(width)
 endfunction
 call SetTab(2) " defaults
 
-au BufNewFile,BufRead BUILD set filetype=build
+autocmd BufNewFile,BufRead BUILD set filetype=build
 autocmd Filetype build call SetTab(4)
 autocmd Filetype make setlocal noexpandtab
 
@@ -36,16 +50,30 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
-set t_Co=256 " iTerm2 256-color mode
+" iTerm2 256-color mode
+set t_Co=256
+
+" filename completion
+set wildmenu
+set wildignore=*.o,*~,*.pyc
+
+" show matching brackets
+set showmatch
 
 " Pathogen
 execute pathogen#infect()
 " NERD Tree
-nnoremap \e :NERDTreeToggle<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
 
 " Go
-au BufNewFile,BufRead *.go set filetype=go
+autocmd BufNewFile,BufRead *.go set filetype=go
 set rtp+=$GOROOT/misc/vim
 
 " Google
-source /usr/share/vim/google/google.vim
+if filereadable("/usr/share/vim/google/google.vim")
+  source /usr/share/vim/google/google.vim
+  Glug blaze
+  Glug outline-window
+  nnoremap <leader>gg :GoogleOutlineWindow<CR>
+  nnoremap <leader>gc :QuickOutline 
+endif
