@@ -40,9 +40,9 @@ function! SetTab(width)
 endfunction
 call SetTab(2) " defaults
 
-autocmd BufNewFile,BufRead BUILD set filetype=build
-autocmd Filetype build call SetTab(4)
-autocmd Filetype make setlocal noexpandtab
+au BufNewFile,BufRead BUILD set filetype=build
+au Filetype build call SetTab(4)
+au Filetype make setlocal noexpandtab
 
 " disable arrow keys
 nnoremap <up> <nop>
@@ -66,7 +66,7 @@ execute pathogen#infect()
 nnoremap <leader>e :NERDTreeToggle<CR>
 
 " Go
-autocmd BufNewFile,BufRead *.go set filetype=go
+au BufNewFile,BufRead *.go set filetype=go
 set rtp+=$GOROOT/misc/vim
 
 " Google
@@ -76,4 +76,5 @@ if filereadable("/usr/share/vim/google/google.vim")
   Glug outline-window
   nnoremap <leader>gg :GoogleOutlineWindow<CR>
   nnoremap <leader>gc :QuickOutline 
+  au Filetype blazebuild call SetTab(4)
 endif
