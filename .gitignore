@@ -1,7 +1,8 @@
 *
-!.gitignore
-!.bash_profile
+!.bashrc
 !.bash_compat
-!.vimrc
+!.bash_profile
+!.gitignore
 !.inputrc
 !.vim
+!.vimrc
