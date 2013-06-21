@@ -69,6 +69,10 @@ nnoremap <leader>e :NERDTreeToggle<CR>
 au BufNewFile,BufRead *.go set filetype=go
 set rtp+=$GOROOT/misc/vim
 
+" Code Folding
+set foldmethod=indent
+set nofoldenable
+
 " Google
 if filereadable("/usr/share/vim/google/google.vim")
   source /usr/share/vim/google/google.vim
