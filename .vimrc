@@ -44,6 +44,7 @@ au BufNewFile,BufRead BUILD setlocal filetype=build
 au Filetype build call SetTab(4)
 au Filetype make setlocal noexpandtab
 au Filetype python call SetTab(4)
+au Filetype htmldjango call SetTab(4)
 
 " disable arrow keys
 nnoremap <up> <nop>
