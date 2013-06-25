@@ -40,9 +40,10 @@ function! SetTab(width)
 endfunction
 call SetTab(2) " defaults
 
-au BufNewFile,BufRead BUILD set filetype=build
+au BufNewFile,BufRead BUILD setlocal filetype=build
 au Filetype build call SetTab(4)
 au Filetype make setlocal noexpandtab
+au Filetype python call SetTab(4)
 
 " disable arrow keys
 nnoremap <up> <nop>
@@ -82,3 +83,7 @@ if filereadable("/usr/share/vim/google/google.vim")
   nnoremap <leader>gc :QuickOutline 
   au Filetype blazebuild call SetTab(4)
 endif
+
+" localvimrc
+let g:localvimrc_sandbox = 0
+let g:localvimrc_whitelist = "^.*$"
