@@ -100,6 +100,9 @@ if [ -f ~/.bash_compat ]; then
   . ~/.bash_compat
 fi
 
+# add detail and color to file listings
+alias ls="ls -Al --color=auto"
+
 # 256 colors
 export TERM='xterm-256color'
 

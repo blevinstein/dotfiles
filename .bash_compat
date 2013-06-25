@@ -1,8 +1,5 @@
 # bash config shared between OSX (.bash_profile) and Linux (.bashrc)
 
-# add detail and color to file listings
-alias ls="ls -Al --color=auto"
-
 # open multiple files in vertical split panes
 alias vim="vim -O"
 
