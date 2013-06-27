@@ -13,9 +13,6 @@
 [submodule ".bash/git-aware-prompt"]
 	path = .bash/git-aware-prompt
 	url = git@github.com:jimeh/git-aware-prompt.git
-[submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
-	url = git@github.com:scrooloose/syntastic.git
 [submodule ".vim/bundle/localvimrc"]
 	path = .vim/bundle/localvimrc
 	url = git@github.com:vim-scripts/localvimrc.git
