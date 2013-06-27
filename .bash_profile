@@ -18,3 +18,4 @@ export GOROOT=/usr/local/go
 export GOPATH=~/dev/go:$GOPATH
 
 export PATH=~/android-sdk-macosx/tools:$PATH
+export PATH=~/android-sdk-macosx/platform-tools:$PATH
