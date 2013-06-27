@@ -17,8 +17,6 @@ set smartcase
 set smarttab
 set expandtab
 
-" au = autocmd
-
 filetype plugin indent on
 
 " set leader
@@ -40,11 +38,11 @@ function! SetTab(width)
 endfunction
 call SetTab(2) " defaults
 
-au BufNewFile,BufRead BUILD setlocal filetype=build
-au Filetype build call SetTab(4)
 au Filetype make setlocal noexpandtab
-au Filetype python call SetTab(4)
+
 au Filetype htmldjango call SetTab(4)
+au Filetype java call SetTab(4)
+au Filetype python call SetTab(4)
 au Filetype xml call SetTab(4)
 
 " disable arrow keys
