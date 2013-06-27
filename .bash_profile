@@ -16,3 +16,5 @@ alias prolog=swipl
 # Go
 export GOROOT=/usr/local/go
 export GOPATH=~/dev/go:$GOPATH
+
+export PATH=~/android-sdk-macosx/tools:$PATH
