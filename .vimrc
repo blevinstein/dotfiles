@@ -51,6 +51,9 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
+" quick quit
+nnoremap <leader>q :qa<CR>
+
 " iTerm2 256-color mode
 set t_Co=256
 
