@@ -3,6 +3,9 @@
 # open multiple files in vertical split panes
 alias vim="vim -O"
 
+# open without GUI
+alias emacs="emacs -nw"
+
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\[$bldgrn\]\u:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\] \$ "
