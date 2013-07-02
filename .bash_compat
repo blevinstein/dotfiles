@@ -9,3 +9,25 @@ alias emacs="emacs -nw"
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\[$bldgrn\]\u:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\] \$ "
+
+function git5_diff_edit {
+  if [ $1 ]; then
+    temp="/tmp/diff.$$.tmp"
+    git5 diff $1 > "$temp"
+    vim $1 +"vertical diffpatch $temp"
+    rm $temp
+  else
+    echo "No filename provided."
+  fi
+}
+
+function git_diff_edit {
+  if [ $1 ]; then
+    temp="/tmp/diff.$$.tmp"
+    git diff $1 > "$temp"
+    vim $1 +"vertical diffpatch $temp"
+    rm $temp
+  else
+    echo "No filename provided."
+  fi
+}
