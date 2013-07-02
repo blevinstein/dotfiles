@@ -42,7 +42,6 @@ au Filetype make setlocal noexpandtab
 
 au Filetype htmldjango call SetTab(4)
 au Filetype java call SetTab(4)
-au Filetype python call SetTab(4)
 au Filetype xml call SetTab(4)
 
 " disable arrow keys
