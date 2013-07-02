@@ -13,7 +13,7 @@ export PS1="\[$bldgrn\]\u:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_
 function git5_diff_edit {
   if [ $1 ]; then
     temp="/tmp/diff.$$.tmp"
-    git5 diff $1 > "$temp"
+    git5 diff --uncommitted $1 > "$temp"
     vim $1 +"vertical diffpatch $temp"
     rm $temp
   else
