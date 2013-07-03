@@ -47,6 +47,9 @@ alias grep="grep --color=auto"
 # 256 colors
 export TERM='xterm-256color'
 
+# open
+alias open='gnome-open'
+
 # Google stuff
 # Perforce setup
 export P4DIFF='vimdiff -f -R'
