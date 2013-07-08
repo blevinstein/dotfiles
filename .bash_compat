@@ -31,13 +31,3 @@ function git_diff_edit {
     echo "No filename provided."
   fi
 }
-
-function dot_preview {
-  if [ $1 ]; then
-    temp="/tmp/dot.$$.tmp.png"
-    dot $1 -Tpng -o $temp
-    open $temp
-  else
-    echo "No filename provided."
-  fi
-}
