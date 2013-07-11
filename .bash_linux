@@ -1,0 +1,46 @@
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command
+shopt -s checkwinsize
+
+# the pattern "**" matches files and zero or more directories
+shopt -s globstar
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+# add detail and color to ls
+alias ls="ls -Al --color=auto"
+# add color to grep
+alias grep="grep --color=auto"
+
+# 256 colors
+export TERM='xterm-256color'
+
+# fix 'open' command
+alias open='gnome-open'
+
+# Google stuff
+# Perforce setup
+export P4DIFF='vimdiff -f -R'
+# Java
+#export PATH="/usr/local/buildtools/java/jdk7-64/bin:$PATH"
+export CLASSPATH="/google/src/cloud/blevinstein/java_dev/google3/java"
+# eclimd
+export ECLIPSE_HOME='/usr/local/google/users/blevinstein/eclipse38/testing'
+export PATH="$PATH:$ECLIPSE_HOME"

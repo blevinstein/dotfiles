@@ -1,6 +1,8 @@
 *
 !.bashrc
 !.bash_compat
+!.bash_linux
+!.bash_osx
 !.bash_profile
 !.gitignore
 !.inputrc
