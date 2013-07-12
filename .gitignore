@@ -6,5 +6,6 @@
 !.bash_profile
 !.gitignore
 !.inputrc
+!.screenrc
 !.vim
 !.vimrc

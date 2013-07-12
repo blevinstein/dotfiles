@@ -1,0 +1,25 @@
+# disable copyright message on startup
+startup_message off
+
+# use C-T escape sequence
+escape "^Tt"
+
+# unicode by default
+defutf8 on
+
+# color scheme: blue screen, black text, green background
+sorendition "+b kG"
+
+# navigation bar at bottom:
+# %H      hostname
+# %-Lw    window list preceeding current window, show flags
+# %{= BW} set current attributes to [no style], fg bright blue, bg bright white
+# %50>    mark current position for truncation to 50%
+# %n      window number
+# %f      window flags
+# *       literal
+# %t      window title
+# %{-}    restore previous attributes
+# %+Lw    window list following current window, show flags
+# %<      pad to the display's width
+hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"

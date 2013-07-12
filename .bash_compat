@@ -6,6 +6,12 @@ alias vim="vim -O"
 # open without GUI
 alias emacs="emacs -nw"
 
+# screen reattach by default
+alias screen="screen -d -R"
+
+# train myself to use C-L instead of "clear"
+alias clear="echo NO!"
+
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\[$bldgrn\]\u:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\] \$ "
