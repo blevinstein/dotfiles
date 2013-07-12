@@ -25,3 +25,6 @@
 [submodule ".emacs.d/ethan-wspace"]
 	path = .emacs.d/ethan-wspace
 	url = git@github.com:glasserc/ethan-wspace.git
+[submodule ".emacs.d/smooth-scrolling"]
+	path = .emacs.d/smooth-scrolling
+	url = git@github.com:aspiers/smooth-scrolling.git
