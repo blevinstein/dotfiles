@@ -19,3 +19,9 @@
 [submodule ".vim/bundle/django.vim"]
 	path = .vim/bundle/django.vim
 	url = git@github.com:vim-scripts/django.vim.git
+[submodule ".emacs.d/js-comint"]
+	path = .emacs.d/js-comint
+	url = git@github.com:adolfosousa/emacs-js-comint-mode.git
+[submodule ".emacs.d/ethan-wspace"]
+	path = .emacs.d/ethan-wspace
+	url = git@github.com:glasserc/ethan-wspace.git

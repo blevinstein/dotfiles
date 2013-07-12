@@ -4,6 +4,8 @@
 !.bash_linux
 !.bash_osx
 !.bash_profile
+!.emacs
+!.emacs.d
 !.gitignore
 !.inputrc
 !.screenrc
