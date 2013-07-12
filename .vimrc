@@ -16,6 +16,8 @@ set smartcase
 " tabs
 set smarttab
 set expandtab
+" fix backspace
+set backspace=indent,eol,start
 
 filetype plugin indent on
 
