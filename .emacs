@@ -1,12 +1,27 @@
 (setq-default indent-tabs-mode nil)
 (global-linum-mode t)
 
-(add-to-list 'load-path "~/.emacs.d/js-comint")
-(require 'js-comint)
-
 (add-to-list 'load-path "~/.emacs.d/ethan-wspace/lisp")
 (require 'ethan-wspace)
 (global-ethan-wspace-mode 1)
 
 (add-to-list 'load-path "~/.emacs.d/smooth-scrolling")
 (require 'smooth-scrolling)
+
+; Javascript
+(add-to-list 'load-path "~/.emacs.d/js-comint")
+(require 'js-comint)
+(setq-default inferior-js-program-command "/usr/bin/env rhino")
+(add-hook 'js-mode-hook '(lambda ()
+                           ;(local-set-key "\C-x\C-e" 'eval-last-sexp)
+                           ;(local-set-key "\C-cb"    'js-send-buffer)
+                           ;(local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
+                           ;(local-set-key "\C-cl"    'js-load-file-and-go)
+                           (local-set-key "\C-c!"    'run-js)
+                           ;(local-set-key "\C-c\C-r" 'js-send-region)
+                           ;(local-set-key "\C-c\C-j" 'js-send-line)
+                           ;(set (make-local-variable 'compile-command)
+                           ;     (let ((file buffer-file-name)) (concat jshint-cli file)))
+                           ;(set (make-local-variable 'compilation-read-command) nil)
+                           ;(local-set-key "\C-c\C-u" 'whitespace-clean-and-compile)
+                           ))
