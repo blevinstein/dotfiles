@@ -52,6 +52,8 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
+" quick save
+nnoremap <leader>w :wa<CR>
 " quick quit
 nnoremap <leader>q :qa<CR>
 
