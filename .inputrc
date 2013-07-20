@@ -1,6 +1,6 @@
 Control-p: history-search-backward
 Control-n: history-search-forward
-"\e[A": redraw-current-line
-"\e[B": redraw-current-line
+"\e[A": history-search-backward
+"\e[B": history-search-forward
 set show-all-if-ambiguous on
 set completion-ignore-case off
