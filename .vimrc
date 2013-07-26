@@ -88,7 +88,7 @@ if filereadable("/usr/share/vim/google/google.vim")
   nnoremap <leader>gg :GoogleOutlineWindow<CR>
   nnoremap <leader>gc :QuickOutline 
   au Filetype blazebuild call SetTab(4)
-  nnoremap <leader>f :w<CR>:!clang-format -i %<CR><CR>l:e!<CR>
+  map <leader>f :pyf /usr/lib/clang-format/clang-format.py<CR>
 endif
 
 " localvimrc
