@@ -1,9 +1,6 @@
 # disable copyright message on startup
 startup_message off
 
-# use C-T escape sequence
-escape "^Tt"
-
 # unicode by default
 defutf8 on
 
@@ -23,3 +20,6 @@ sorendition "+b kG"
 # %+Lw    window list following current window, show flags
 # %<      pad to the display's width
 hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+
+# increase length of scrollback buffer
+defscrollback 10000
