@@ -23,3 +23,6 @@ hardstatus alwayslastline "%H %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 
 # increase length of scrollback buffer
 defscrollback 10000
+
+# disable visual bell
+vbell off
