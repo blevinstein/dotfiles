@@ -34,3 +34,18 @@ export CLASSPATH="/google/src/cloud/blevinstein/java_dev/google3/java"
 # eclimd
 export ECLIPSE_HOME='/usr/local/google/users/blevinstein/eclipse38/testing'
 export PATH="$PATH:$ECLIPSE_HOME"
+
+function clang_git5 {
+  git5 diff --name-only | xargs -I FILE clang-format -i ~/dev/FILE
+}
+
+function git5_diff_edit {
+  if [ $1 ]; then
+    temp="/tmp/diff.$$.tmp"
+    git5 diff --uncommitted $1 > "$temp"
+    vim $1 +"vertical diffpatch $temp"
+    rm $temp
+  else
+    echo "No filename provided."
+  fi
+}

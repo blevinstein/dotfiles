@@ -1,4 +1,4 @@
-# bash config shared between OSX (.bash_profile) and Linux (.bashrc)
+# bash config shared across platforms
 
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
@@ -13,29 +13,15 @@ HISTFILESIZE=10000
 # open multiple files in vertical split panes
 alias vim="vim -O"
 
-# open without GUI
+# open emacs without GUI
 alias emacs="emacs -nw"
 
 # screen reattach by default
 alias screen="screen -d -R"
 
-# train myself to use C-L instead of "clear"
-alias clear="echo NO!"
-
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\[$bldgrn\]\u:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\] \$ "
-
-function git5_diff_edit {
-  if [ $1 ]; then
-    temp="/tmp/diff.$$.tmp"
-    git5 diff --uncommitted $1 > "$temp"
-    vim $1 +"vertical diffpatch $temp"
-    rm $temp
-  else
-    echo "No filename provided."
-  fi
-}
 
 function git_diff_edit {
   if [ $1 ]; then
