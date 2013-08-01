@@ -4,6 +4,9 @@ startup_message off
 # unicode by default
 defutf8 on
 
+# use C-T escape sequence to avoid conflict with emacs/bash C-A
+escape "^Tt"
+
 # color scheme: blue screen, black text, green background
 sorendition "+b kG"
 
