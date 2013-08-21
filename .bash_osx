@@ -5,6 +5,7 @@ alias ls="ls -AlG"
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH # Homebrew
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH # MacPorts
+export PATH=/usr/local/share/npm/bin:$PATH       # npm
 
 # Prolog
 alias prolog=swipl
