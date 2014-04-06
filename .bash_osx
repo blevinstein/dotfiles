@@ -18,3 +18,9 @@ export GOPATH=~/dev/go:$GOPATH
 #export PATH=~/android-sdk-macosx/tools:$PATH
 #export PATH=~/android-sdk-macosx/platform-tools:$PATH
 #export CLASSPATH=~/android-sdk-macosx/sources/android-17:$CLASSPATH
+
+# Heroku
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# PostgreSQL
+export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
