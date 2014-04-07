@@ -69,8 +69,6 @@ set showmatch
 
 " Pathogen
 execute pathogen#infect()
-" NERD Tree
-nnoremap <leader>e :NERDTreeToggle<CR>
 
 " Go
 au BufNewFile,BufRead *.go set filetype=go
@@ -79,17 +77,6 @@ set rtp+=$GOROOT/misc/vim
 " Code Folding
 set foldmethod=indent
 set nofoldenable
-
-" Google
-if filereadable("/usr/share/vim/google/google.vim")
-  source /usr/share/vim/google/google.vim
-  Glug blaze
-  Glug outline-window
-  nnoremap <leader>gg :GoogleOutlineWindow<CR>
-  nnoremap <leader>gc :QuickOutline 
-  au Filetype blazebuild call SetTab(4)
-  map <leader>f :pyf /usr/lib/clang-format/clang-format.py<CR>
-endif
 
 " localvimrc
 let g:localvimrc_sandbox = 0
