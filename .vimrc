@@ -45,6 +45,7 @@ au Filetype make setlocal noexpandtab
 au Filetype htmldjango call SetTab(4)
 au Filetype java call SetTab(4)
 au Filetype xml call SetTab(4)
+au Filetype ruby call SetTab(2)
 
 " disable arrow keys
 nnoremap <up> <nop>
