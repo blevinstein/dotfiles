@@ -43,7 +43,7 @@ call SetTab(2) " defaults
 au Filetype make setlocal noexpandtab
 
 au Filetype htmldjango call SetTab(4)
-au Filetype java call SetTab(4)
+au Filetype java call SetTab(2)
 au Filetype xml call SetTab(4)
 au Filetype ruby call SetTab(2)
 
