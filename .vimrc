@@ -69,7 +69,7 @@ set wildignore=*.o,*~,*.pyc
 set showmatch
 
 " Pathogen
-execute pathogen#infect()
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " Go
 au BufNewFile,BufRead *.go set filetype=go

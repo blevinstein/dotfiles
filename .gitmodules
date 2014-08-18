@@ -28,3 +28,9 @@
 [submodule ".vim/bundle/rust.vim"]
 	path = .vim/bundle/rust.vim
 	url = git@github.com:wting/rust.vim.git
+[submodule "/Users/blevinstein/.vim/bundle/vim-pathogen"]
+	path = /Users/blevinstein/.vim/bundle/vim-pathogen
+	url = git@github.com:tpope/vim-pathogen
+[submodule "/Users/blevinstein/.vim/bundle/vim-ant"]
+	path = /Users/blevinstein/.vim/bundle/vim-ant
+	url = git@github.com:teneighty/vim-ant
