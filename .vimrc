@@ -1,4 +1,9 @@
+" Pathogen
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
 syntax on
+filetype plugin indent on
+
 colors twilight256
 
 set textwidth=0 " don't automatically wrap lines
@@ -18,8 +23,6 @@ set smarttab
 set expandtab
 " fix backspace
 set backspace=indent,eol,start
-
-filetype plugin indent on
 
 " set leader
 let mapleader = ','
@@ -67,9 +70,6 @@ set wildignore=*.o,*~,*.pyc
 
 " show matching brackets
 set showmatch
-
-" Pathogen
-runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " Go
 au BufNewFile,BufRead *.go set filetype=go
