@@ -77,7 +77,9 @@ set rtp+=$GOROOT/misc/vim
 
 " Code Folding
 set foldmethod=indent
-set nofoldenable
+set foldlevelstart=20 " disable most folding by default
+" language-specific fold settings
+autocmd FileType java set foldlevel=1 " fold each method by default
 
 " localvimrc
 let g:localvimrc_sandbox = 0
