@@ -1,9 +1,15 @@
+# OS-specific bash settings
 if [[ `uname` == 'Darwin' ]]; then
   source ~/.bash_osx
-  source ~/.bash_compat
 fi
-
 if [[ `uname` == 'Linux' ]]; then
   source ~/.bash_linux
-  source ~/.bash_compat
+fi
+
+# multiple-OS compatible bash settings
+source ~/.bash_compat
+
+# local settings
+if [ -a ~/.bash_local ]; then
+  source ~/.bash_local
 fi
