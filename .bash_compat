@@ -34,6 +34,8 @@ function git_diff_edit {
   fi
 }
 
-# Keybindings for jobs and fg
+# shortcuts
+# ^j -> jobs
+# ^r -> fg ("resume")
 bind -x '"\C-j":jobs'
 bind -x '"\C-r":fg'

@@ -1,7 +1,12 @@
+# incremental up/down search
 Control-p: history-search-backward
 Control-n: history-search-forward
-Control-d: backward-kill-word
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+
+# emacs-like delete last word
+Control-d: backward-kill-word
+
+# tab completion
 set show-all-if-ambiguous on
 set completion-ignore-case off

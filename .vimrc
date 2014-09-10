@@ -78,8 +78,8 @@ set rtp+=$GOROOT/misc/vim
 " Code Folding
 set foldmethod=indent
 set foldlevelstart=20 " disable most folding by default
-" shortcut for folding, e.g. 1<leader>f to set foldlevel=1
-noremap <silent> <leader>f :<C-U>exe "set foldlevel=".count<CR>
+" shortcut for folding, e.g. 1<leader>z to set foldlevel=1
+noremap <silent> <leader>z :<C-U>exe "set foldlevel=".count<CR>
 
 " localvimrc
 let g:localvimrc_sandbox = 0
@@ -93,6 +93,6 @@ noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,
 noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 " Allow for computer-specific differences
-if filereadable(".vimrc_local")
-  source .vimrc_local
+if filereadable(expand("~/.vimrc_local"))
+  source ~/.vimrc_local
 endif
