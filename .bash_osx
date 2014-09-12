@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # add detail and color to file listings
 alias ls="ls -AlG"
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # OS-specific bash settings
 if [[ `uname` == 'Darwin' ]]; then
   source ~/.bash_osx
