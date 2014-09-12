@@ -17,7 +17,7 @@ fi
 
 # add detail and color to ls
 alias ls="ls -Al --color=auto"
-# files grep (as opposed to pipe input)
+# file grep (as opposed to piping input)
 alias fgrep="grep -r --color=auto"
 
 # 256 colors
@@ -26,27 +26,10 @@ export TERM='xterm-256color'
 # fix 'open' command
 alias open='gnome-open'
 
-# Google stuff
-# Perforce setup
-export P4DIFF='vimdiff -f -R'
-# Java
-#export PATH="/usr/local/buildtools/java/jdk7-64/bin:$PATH"
-export CLASSPATH="/google/src/cloud/blevinstein/java_dev/google3/java"
-# eclimd
-export ECLIPSE_HOME='/usr/local/google/users/blevinstein/eclipse38/testing'
-export PATH="$PATH:$ECLIPSE_HOME"
-
-function clang_git5 {
-  git5 diff --name-only | xargs -I FILE clang-format -i ~/dev/FILE
-}
-
-function git5_diff_edit {
-  if [ $1 ]; then
-    temp="/tmp/diff.$$.tmp"
-    git5 diff --uncommitted $1 > "$temp"
-    vim $1 +"vertical diffpatch $temp"
-    rm $temp
-  else
-    echo "No filename provided."
-  fi
+# Used for automatically running build commands.
+# e.g. onchange . "make all"
+function onchange {
+  while inotifywait -q -r -e modify $1; do
+    $2
+  done
 }
