@@ -40,3 +40,11 @@ function git_diff_edit {
 # ^r -> fg ("resume")
 bind -x '"\C-j":jobs'
 bind -x '"\C-r":fg'
+
+# Runs program in another directory.
+# Usage: f /some/dir prog arg1 arg2
+function f {
+  pushd $1 >> /dev/null
+  $2 "${@:3}"
+  popd >> /dev/null
+}
