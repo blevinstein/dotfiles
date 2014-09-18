@@ -1,29 +1,52 @@
 #!/usr/bin/env bash
 # bash config shared across platforms
 
+# CONFIG
+
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
-
 # append to the history file, don't overwrite it
 shopt -s histappend
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=10000
 HISTFILESIZE=10000
-
-# open multiple files in vertical split panes
+# open multiple files in vim using vertical panes
 alias vim="vim -O"
-
 # open emacs without GUI
 alias emacs="emacs -nw"
-
 # screen reattach by default
 alias screen="screen -d -R"
-
+# git aware prompt
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\[$bldgrn\]\u:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\] \$ "
 
+# SHORTCUTS
+
+# ^j -> jobs
+bind -x '"\C-j":jobs'
+# ^r -> fg ("resume")
+bind -x '"\C-r":fg'
+
+# TOOLS
+
+# Runs program in another directory.
+# Usage: f <directory> <program> <args...>
+function f {
+  if [ $1 ]; then
+    if [ $2 ]; then
+      pushd $1 >> /dev/null
+      $2 "${@:3}"
+      popd >> /dev/null
+    else
+      echo "No program name provided."
+    fi
+  else
+    echo "No directory provided."
+  fi
+}
+# Edit a file with git diffs visible.
+# Usage: git_diff_edit <filename>
 function git_diff_edit {
   if [ $1 ]; then
     temp="/tmp/diff.$$.tmp"
@@ -34,17 +57,5 @@ function git_diff_edit {
     echo "No filename provided."
   fi
 }
-
-# shortcuts
-# ^j -> jobs
-# ^r -> fg ("resume")
-bind -x '"\C-j":jobs'
-bind -x '"\C-r":fg'
-
-# Runs program in another directory.
-# Usage: f /some/dir prog arg1 arg2
-function f {
-  pushd $1 >> /dev/null
-  $2 "${@:3}"
-  popd >> /dev/null
-}
+# Temporarily ignore a file
+alias gitignore='git update-index --skip-worktree'

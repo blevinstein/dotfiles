@@ -2,12 +2,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# check the window size after each command
-shopt -s checkwinsize
-
-# the pattern "**" matches files and zero or more directories
-shopt -s globstar
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -15,21 +9,27 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# CONFIG
+
+# check the window size after each command
+shopt -s checkwinsize
+# the pattern "**" matches files and zero or more directories
+shopt -s globstar
 # add detail and color to ls
 alias ls="ls -Al --color=auto"
 # file grep (as opposed to piping input)
 alias fgrep="grep -r --color=auto"
-
 # 256 colors
 export TERM='xterm-256color'
-
 # fix 'open' command
 alias open='gnome-open'
 
+# TOOLS
+
 # Used for automatically running build commands.
-# e.g. onchange . "make all"
+# Usage: onchange <directory> <command> <args...>
 function onchange {
   while inotifywait -q -r -e modify $1; do
-    $2
+    $2 "${@:3}"
   done
 }

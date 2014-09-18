@@ -8,20 +8,18 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH # Homebrew
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH # MacPorts
 export PATH=/usr/local/share/npm/bin:$PATH       # npm
 
+# CONFIG
+
 # Prolog
 alias prolog=swipl
-
 # Go
 export GOROOT=/usr/local/go
 export GOPATH=~/dev/go:$GOPATH
-
 # Android
 #export PATH=~/android-sdk-macosx/tools:$PATH
 #export PATH=~/android-sdk-macosx/platform-tools:$PATH
 #export CLASSPATH=~/android-sdk-macosx/sources/android-17:$CLASSPATH
-
 # Heroku
 export PATH="/usr/local/heroku/bin:$PATH"
-
 # PostgreSQL
 export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
