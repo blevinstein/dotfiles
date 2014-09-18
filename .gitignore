@@ -1,12 +1,16 @@
 *
-!.bashrc
+!.bash
+!.bash/local
+!.bash/local/*
 !.bash_compat
 !.bash_linux
 !.bash_osx
 !.bash_profile
+!.bashrc
 !.emacs
 !.emacs.d
 !.gitignore
+!.gitmodules
 !.inputrc
 !.screenrc
 !.vim

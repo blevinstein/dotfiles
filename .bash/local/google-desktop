@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+export PATH=$PATH:~/intelliJ/bin
+export EDITOR='vim'
+export IDEA_JDK=/usr/local/buildtools/java/jdk7/
+export P4DIFF='vimdiff -f -R'
+
+alias prodaccess='prodaccess -g'
+
+function git5_diff_edit {
+  if [ $1 ]; then
+    temp="/tmp/diff.$$.tmp"
+    git5 diff --uncommitted $1 > "$temp"
+    vim $1 +"vertical diffpatch $temp"
+    rm $temp
+  else
+    echo "No filename provided."
+  fi
+}
+
+function git5_glint {
+  git5 diff --name-only | xargs -I FILE glint ../FILE
+}
+
+alias beep='paplay /usr/share/sounds/freedesktop/stereo/bell.oga'
+
+# mconwebapp-specific
+export MCON=java/com/google/commerce/delivery/mconwebapp
+export MTEST=javatests/com/google/commerce/delivery/mconwebapp
+export MCON_SRC='commerce/delivery java/com/google/commerce/delivery javatests/com/google/commerce/delivery'
