@@ -34,3 +34,6 @@
 [submodule ".vim/bundle/vim-ant"]
 	path = .vim/bundle/vim-ant
 	url = git@github.com:teneighty/vim-ant
+[submodule ".vim/bundle/vim-autoformat"]
+	path = .vim/bundle/vim-autoformat
+	url = git@github.com:Chiel92/vim-autoformat.git
