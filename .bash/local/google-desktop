@@ -21,9 +21,21 @@ function git5_glint {
   git5 diff --name-only | xargs -I FILE glint ../FILE
 }
 
+function git5_review {
+  git5 start cl$1
+  git5 patch $1
+}
+
 alias beep='paplay /usr/share/sounds/freedesktop/stereo/bell.oga'
 
-# mconwebapp-specific
+# mconwebapp
 export MCON=java/com/google/commerce/delivery/mconwebapp
 export MTEST=javatests/com/google/commerce/delivery/mconwebapp
 export MCON_SRC='commerce/delivery java/com/google/commerce/delivery javatests/com/google/commerce/delivery'
+
+# dart
+alias dartium="~/dart/chromium/chrome"
+
+# dcon
+export DCON=commerce/delivery/dispatchconsole
+export DSERVER=java/com/google/commerce/delivery/dispatchconsole
