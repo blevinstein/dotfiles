@@ -33,6 +33,11 @@ export MCON=java/com/google/commerce/delivery/mconwebapp
 export MTEST=javatests/com/google/commerce/delivery/mconwebapp
 export MCON_SRC='commerce/delivery java/com/google/commerce/delivery javatests/com/google/commerce/delivery'
 
+# sdd
+# https://sites.google.com/a/google.com/same-day-delivery/home/engineering/mission-control/commandline
+alias sdd='/google/data/ro/projects/commerce/delivery/sdd'
+alias sdd-dev='sdd --sddrc /google/src/head/depot/google3/commerce/delivery/tools/sddrc-dev'
+
 # dart
 alias dartium="~/dart/chromium/chrome"
 
