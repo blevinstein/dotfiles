@@ -37,3 +37,6 @@
 [submodule ".vim/bundle/vim-autoformat"]
 	path = .vim/bundle/vim-autoformat
 	url = git@github.com:Chiel92/vim-autoformat.git
+[submodule ".vim/bundle/dart-vim"]
+	path = .vim/bundle/dart-vim
+	url = git@github.com:dart-lang/dart-vim-plugin.git
