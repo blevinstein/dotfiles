@@ -13,6 +13,7 @@
 !.gitignore
 !.gitmodules
 !.inputrc
+!.racketrc
 !.screenrc
 !.vim
 !.vimrc
