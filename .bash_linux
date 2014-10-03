@@ -23,6 +23,8 @@ alias fgrep="grep -r --color=auto"
 export TERM='xterm-256color'
 # fix 'open' command
 alias open='gnome-open'
+# allow escape sequences
+alias echo='echo -e'
 
 # TOOLS
 

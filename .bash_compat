@@ -30,6 +30,25 @@ bind -x '"\C-r":fg'
 
 # TOOLS
 
+# Color stuff copied from https://gist.github.com/brandonb927/3195465
+black='\033[0;30m'
+white='\033[0;37m'
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+magenta='\033[0;35m'
+cyan='\033[0;36m'
+# Color reset
+alias uncolor='tput sgr0'
+# Color echo
+function cecho {
+  color=$2
+  echo "$color$1"
+  uncolor
+  return
+}
+
 # Runs program in another directory.
 # Usage: f <directory> <program> <args...>
 function f {
