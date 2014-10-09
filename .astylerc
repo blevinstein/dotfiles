@@ -1,32 +1,23 @@
 # http://astyle.sourceforge.net/astyle.html#_Options_File
 
-# attached brackets
 --style=java
 --attach-classes
 --attach-inlines
 
-# 2-space intent
 --indent=spaces=2
 
-# indent case blocks
 --indent-switches
 
-# padding around operators
 --pad-oper
 
-# padding before if/for/while
 --pad-header
 
-# require brackets on one-line ifs
 --add-brackets
 
-# allow one-line blocks and statements
 --keep-one-line-blocks
 --keep-one-line-statements
 
-# no tabs
 --convert-tabs
 
-# max line 80 characters, after logical operations
---max-code-length=80
+--max-code-length=100
 --break-after-logical
