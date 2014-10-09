@@ -6,7 +6,7 @@
 --attach-inlines
 
 # 2-space intent
---indent=spaces=3
+--indent=spaces=2
 
 # indent case blocks
 --indent-switches
