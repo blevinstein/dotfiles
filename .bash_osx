@@ -23,3 +23,11 @@ export GOPATH=~/dev/go:$GOPATH
 export PATH="/usr/local/heroku/bin:$PATH"
 # PostgreSQL
 export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
+
+# TOOLS
+
+# Used for automatically running build commands.
+# Usage: onchange <directory> <command> <args...>
+function onchange {
+  fswatch -o $1 | xargs -n1 -I{} $2 "${@:3}"
+}
