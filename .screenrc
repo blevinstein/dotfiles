@@ -5,7 +5,7 @@ startup_message off
 defutf8 on
 
 # use C-T escape sequence to avoid conflict with emacs/bash C-A
-escape "^Tt"
+#escape "^Tt"
 
 # color scheme: blue screen, black text, green background
 sorendition "+b kG"
