@@ -20,6 +20,7 @@ alias screen="screen -d -R"
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\[$bldgrn\]\u:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\] \$ "
+alias git_get_branch="git rev-parse --abbrev-ref HEAD"
 # ant colorized output
 alias ant="ant -logger org.apache.tools.ant.listener.AnsiColorLogger"
 
