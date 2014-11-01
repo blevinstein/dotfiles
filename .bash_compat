@@ -16,8 +16,6 @@ alias vim="vim -O"
 alias emacs="emacs -nw"
 # screen reattach by default
 alias screen="screen -d -R"
-# git editor
-export EDITOR="vim"
 # git aware prompt
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh

@@ -1,0 +1,9 @@
+[core]
+  editor = vim
+
+[push]
+  default = simple
+
+[user]
+	email = blevinstein@gmail.com
+  name = Brian Levinstein

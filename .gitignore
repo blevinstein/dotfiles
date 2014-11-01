@@ -10,6 +10,7 @@
 !.bashrc
 !.emacs
 !.emacs.d
+!.gitconfig
 !.gitignore
 !.gitmodules
 !.inputrc
