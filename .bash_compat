@@ -87,5 +87,5 @@ alias gitsee='git update-index --no-skip-worktree'
 
 # Better copy
 function copy {
-  sudo rsync -a -P --info=progress2 $1 $2
+  rsync -a -P --info=progress2 $1 $2
 }
