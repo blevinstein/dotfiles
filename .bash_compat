@@ -33,6 +33,8 @@ bind -x '"\C-r":fg'
 
 # TOOLS
 
+export PATH=~/tools:$PATH
+
 # Color stuff copied from https://gist.github.com/brandonb927/3195465
 black='\033[0;30m'
 white='\033[0;37m'
