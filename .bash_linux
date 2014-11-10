@@ -18,7 +18,7 @@ shopt -s globstar
 # add detail and color to ls
 alias ls="ls -Al --color=auto"
 # file grep (as opposed to piping input)
-alias grep="grep -i --color=auto"
+alias grep="grep --color=auto"
 # 256 colors
 export TERM='xterm-256color'
 # fix 'open' command
