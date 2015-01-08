@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 # OS-specific bash settings
 if [[ `uname` == 'Darwin' ]]; then
   source ~/.bash_osx
