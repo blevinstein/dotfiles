@@ -38,3 +38,11 @@ function onchange {
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Kill a process, given a port it is using
+# Usage: kill-port 8088/tcp
+function kill-port {
+  pid=`fuser $1 2>&1 | awk '{print $2}'`
+  echo "kill" $pid
+  kill $pid
+}
