@@ -89,3 +89,8 @@ alias gitsee='git update-index --no-skip-worktree'
 function copy {
   rsync -a -P --info=progress2 $1 $2
 }
+
+# Notes:
+#
+# To open all edited files in a git repo:
+# f [repo] [vim/intellij] `git diff --name-only`
