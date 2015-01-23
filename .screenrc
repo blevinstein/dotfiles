@@ -34,3 +34,6 @@ vbell off
 # NOTE replaces bindings for +wrap/-wrap
 bind r chacl * -w 0
 bind ^r chacl * +w 0
+
+# https://bugs.launchpad.net/ubuntu/+source/screen/+bug/600999
+defnonblock on
