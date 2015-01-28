@@ -46,3 +46,8 @@ function kill-port {
   echo "kill" $pid
   kill $pid
 }
+
+# screen shorthands
+alias sl="screen -list"
+alias ss="screen -S"
+alias sr="screen -r"
