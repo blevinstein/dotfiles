@@ -31,7 +31,7 @@ alias echo='echo -e'
 # Usage: onchange <directory> <command> <args...>
 function onchange {
   while inotifywait -q -r -e modify $1; do
-    $2 "${@:3}"
+    "${@:2}"
   done
 }
 
