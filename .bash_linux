@@ -46,3 +46,9 @@ function kill-port {
   echo "kill" $pid
   kill $pid
 }
+
+# execute a command in background
+function x {
+  "$@" &
+  disown
+}
