@@ -90,6 +90,11 @@ function copy {
   rsync -a -P --info=progress2 $1 $2
 }
 
+# screen shorthands
+alias sl="screen -list"
+alias ss="screen -S"
+alias sr="screen -r"
+
 # Notes:
 #
 # To open all edited files in a git repo:
