@@ -47,6 +47,18 @@ function kill-port {
   kill $pid
 }
 
+# Find a free port, given a starting port
+# Usage: free-port 8080
+function free-port {
+  port=$1
+  while true; do
+    check=`fuser $port/tcp 2>&1`
+    if [ -z "$check" ]; then break; fi
+    port=$(expr $port + 1)
+  done
+  echo $port
+}
+
 # execute a command in background
 function x {
   "$@" &
