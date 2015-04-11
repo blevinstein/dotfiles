@@ -24,6 +24,8 @@ export TERM='xterm-256color'
 alias open='gnome-open'
 # allow escape sequences
 alias echo='echo -e'
+# recursive copy
+alias cp='cp -r'
 
 # TOOLS
 
