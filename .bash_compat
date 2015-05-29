@@ -14,8 +14,6 @@ HISTFILESIZE=10000
 alias vim="vim -O"
 # open emacs without GUI
 alias emacs="emacs -nw"
-# screen reattach by default
-alias screen="screen -d -R"
 # git aware prompt
 export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
@@ -90,10 +88,28 @@ function copy {
   rsync -a -P --info=progress2 $1 $2
 }
 
-# screen shorthands
+# screen commands
+
+# List all running screen sessions
+# Usage: sl
 alias sl="screen -list"
+# Start a new screen session
+# Usage: ss <sessioname>
 alias ss="screen -S"
+# Reattach a running screen session
+# Usage: sr <sessionname>
 alias sr="screen -r"
+# Executes a command in a running screen session
+function sx {
+  if [ "$#" -ge 2 ]; then
+    # "stuff" is a screen command
+    command="${@:2}"
+    screen -S test -X stuff "$command\r"
+  else
+    echo "Too few arguments."
+    echo "Usage: sx <session> <command...>"
+  fi
+}
 
 # Notes:
 #
