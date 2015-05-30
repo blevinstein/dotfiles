@@ -32,5 +32,7 @@ vbell off
 
 # disable/enable write
 # NOTE replaces bindings for +wrap/-wrap
+# Ctrl-a r => disable write
 bind r chacl * -w 0
+# Ctrl-a Ctrl-r => disable read
 bind ^r chacl * +w 0
