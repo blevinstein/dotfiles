@@ -79,6 +79,13 @@ function git_diff_edit {
     echo "No filename provided."
   fi
 }
+
+# execute a command in background
+function x {
+  "$@" &
+  disown
+}
+
 # Temporarily ignore a file
 alias gitignore='git update-index --skip-worktree'
 alias gitsee='git update-index --no-skip-worktree'
