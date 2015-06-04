@@ -104,7 +104,7 @@ function sx {
   if [ "$#" -ge 2 ]; then
     # "stuff" is a screen command
     command="${@:2}"
-    screen -S $1 -X stuff "$command\r"
+    screen -r $1 -X stuff "$command\r"
   else
     echo "Too few arguments."
     echo "Usage: sx <session> <command...>"
