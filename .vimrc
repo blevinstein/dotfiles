@@ -52,6 +52,7 @@ au Filetype java call SetTab(2)
 au Filetype xml call SetTab(4)
 au Filetype ruby call SetTab(2)
 au Filetype racket call SetTab(2)
+au Filetype python call SetTab(2)
 
 " disable arrow keys
 nnoremap <up> <nop>
