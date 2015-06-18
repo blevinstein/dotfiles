@@ -12,6 +12,7 @@ HISTSIZE=10000
 HISTFILESIZE=10000
 # open multiple files in vim using vertical panes
 alias vim="vim -O"
+export EDITOR="vim"
 # open emacs without GUI
 alias emacs="emacs -nw"
 # git aware prompt
