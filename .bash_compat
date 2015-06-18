@@ -119,6 +119,20 @@ function sx {
   fi
 }
 
+# tmux commands
+# These correspond to the above screen shortcuts, but start with t
+alias tl="tmux list-sessions"
+alias ts="tmux new -s"
+alias tr="tmux attach -t"
+function tx {
+  if [ "$#" -ge 2 ]; then
+    tmux send-keys -t $1 "${@:2}" C-m
+  else
+    echo "Too few arguments."
+    echo "Usage: tx <session> <command...>"
+  fi
+}
+
 # Notes:
 #
 # To open all edited files in a git repo:
