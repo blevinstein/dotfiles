@@ -5,5 +5,14 @@
   default = simple
 
 [user]
-	email = blevinstein@gmail.com
+  email = blevinstein@gmail.com
   name = Brian Levinstein
+
+# kdiff3 for merges
+[mergetool "kdiff3"]
+  path = /usr/bin/kdiff3
+  trustExitCode = false
+[mergetool]
+  keepBackup = false
+[merge]
+  tool = kdiff3
