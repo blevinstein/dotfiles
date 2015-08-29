@@ -82,6 +82,9 @@ set rtp+=$GOROOT/misc/vim
 " racket
 au BufNewFile,BufRead *.rkt set filetype=racket
 
+" Processing
+au BufNewFile,BufRead *.pde set filetype=java
+
 " Code Folding
 set foldmethod=indent
 set foldlevelstart=20 " disable most folding by default
