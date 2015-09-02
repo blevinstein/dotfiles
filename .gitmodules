@@ -52,3 +52,6 @@
 [submodule ".vim/bundle/vim-scala"]
 	path = .vim/bundle/vim-scala
 	url = git@github.com:derekwyatt/vim-scala.git
+[submodule ".vim/bundle/trailertrash.vim"]
+	path = .vim/bundle/trailertrash.vim
+	url = git@github.com:csexton/trailertrash.vim
