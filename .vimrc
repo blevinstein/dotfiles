@@ -49,7 +49,7 @@ au Filetype make setlocal noexpandtab
 
 au Filetype html call SetTab(2)
 au Filetype java call SetTab(2)
-au Filetype xml call SetTab(4)
+au Filetype xml call SetTab(2)
 au Filetype ruby call SetTab(2)
 au Filetype racket call SetTab(2)
 au Filetype python call SetTab(2)
