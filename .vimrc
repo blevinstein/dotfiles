@@ -43,16 +43,18 @@ function! SetTab(width)
   let &l:tabstop = a:width
   let &l:shiftwidth = a:width
 endfunction
-call SetTab(2) " defaults
+call SetTab(2) " default
+
+function! SetMaxLen(width)
+  let &l:colorcolumn = a:width
+endfunction
+call SetTab(80) " default
 
 au Filetype make setlocal noexpandtab
 
-au Filetype html call SetTab(2)
-au Filetype java call SetTab(2)
-au Filetype xml call SetTab(2)
-au Filetype ruby call SetTab(2)
-au Filetype racket call SetTab(2)
-au Filetype python call SetTab(2)
+au Filetype html call SetMaxLen(100)
+au Filetype java call SetMaxLen(100)
+au Filetype xml call SetMaxLen(100)
 
 " disable arrow keys
 nnoremap <up> <nop>
@@ -109,3 +111,4 @@ noremap <leader>tt :TrailerTrim<CR>
 if filereadable(expand("~/.vimrc_local"))
   source ~/.vimrc_local
 endif
+
