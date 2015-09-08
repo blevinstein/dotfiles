@@ -48,7 +48,7 @@ call SetTab(2) " default
 function! SetMaxLen(width)
   let &l:colorcolumn = a:width
 endfunction
-call SetTab(80) " default
+call SetMaxLen(80) " default
 
 au Filetype make setlocal noexpandtab
 
