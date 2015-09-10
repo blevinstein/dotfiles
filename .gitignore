@@ -1,4 +1,7 @@
+# ignore all by default
 *
+
+# include dotfiles
 !.astylerc
 !.bash
 !.bash/local
@@ -9,15 +12,23 @@
 !.bash_profile
 !.bashrc
 !.emacs
-!.emacs.d
+!.emacs.d/*
 !.gitconfig
 !.gitignore
+!.gitignore_global
 !.gitmodules
 !.inputrc
 !.racketrc
 !.screenrc
-!.vim
+!.tmux.conf
+!.vim/bundle/*
+!.vim/colors/*
 !.vimrc
+
+# include readme
+!Readme.md
+
+# include tools
 !tools
 !tools/*
-*.pyc
+
