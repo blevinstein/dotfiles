@@ -56,17 +56,6 @@ au Filetype html call SetMaxLen(100)
 au Filetype java call SetMaxLen(100)
 au Filetype xml call SetMaxLen(100)
 
-" disable arrow keys
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-
-" quick save
-nnoremap <leader>w :wa<CR>
-" quick quit
-nnoremap <leader>q :qa<CR>
-
 " iTerm2 256-color mode
 set t_Co=256
 
