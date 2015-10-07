@@ -46,6 +46,7 @@ endfunction
 call SetTab(2) " default
 
 function! SetMaxLen(width)
+  let &l:textwidth = a:width
   let &l:colorcolumn = a:width + 1
 endfunction
 call SetMaxLen(80) " default
