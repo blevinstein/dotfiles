@@ -55,3 +55,6 @@
 [submodule ".vim/bundle/trailertrash.vim"]
 	path = .vim/bundle/trailertrash.vim
 	url = git@github.com:csexton/trailertrash.vim
+[submodule ".vim/bundle/CamelCaseMotion"]
+	path = .vim/bundle/CamelCaseMotion
+	url = git://github.com/bkad/CamelCaseMotion
