@@ -55,6 +55,7 @@ au Filetype make setlocal noexpandtab
 
 au Filetype html call SetMaxLen(100)
 au Filetype java call SetMaxLen(100)
+au Filetype scala call SetMaxLen(80)
 au Filetype xml call SetMaxLen(100)
 
 " iTerm2 256-color mode
