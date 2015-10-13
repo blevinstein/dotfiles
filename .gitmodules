@@ -58,3 +58,6 @@
 [submodule ".vim/bundle/CamelCaseMotion"]
 	path = .vim/bundle/CamelCaseMotion
 	url = git://github.com/bkad/CamelCaseMotion
+[submodule "/usr/local/google/home/blevinstein/.vim/bundle/css.vim"]
+	path = /usr/local/google/home/blevinstein/.vim/bundle/css.vim
+	url = git://github.com/JulesWang/css.vim
