@@ -81,6 +81,9 @@ au BufNewFile,BufRead *.pde set filetype=java
 " Scala
 au BufNewFile,BufRead *.sbt set filetype=scala
 
+" Make highlighting for html not suck
+au BufNewFile,BufRead *.html set filetype=xml
+
 " Code Folding
 set foldmethod=indent
 set foldlevelstart=20 " disable most folding by default
