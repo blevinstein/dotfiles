@@ -54,7 +54,7 @@ function kill-port {
 function free-port {
   port=$1
   while true; do
-    check=`fuser $port/tcp 2>&1`
+    check=`fuser $port/tcp 2>&1 | grep $port/tcp`
     if [ -z "$check" ]; then break; fi
     port=$(expr $port + 1)
   done
