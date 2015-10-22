@@ -23,6 +23,8 @@ alias git_get_branch="git rev-parse --abbrev-ref HEAD"
 # ant colorized output
 alias ant="ant -logger org.apache.tools.ant.listener.AnsiColorLogger"
 
+alias mkdir="mkdir -p"
+
 # SHORTCUTS
 
 # ^j -> jobs
