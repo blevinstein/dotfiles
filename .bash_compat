@@ -122,7 +122,13 @@ function sx {
 # tmux commands
 # These correspond to the above screen shortcuts, but start with t
 alias tl="tmux list-sessions"
-alias ts="tmux new -s"
+function ts {
+  if [ $1 ]; then
+    tmux new -s $1
+  else
+    tmux new
+  fi
+}
 alias tr="tmux attach -t"
 function tx {
   if [ "$#" -ge 2 ]; then
