@@ -57,6 +57,7 @@ au Filetype html call SetMaxLen(100)
 au Filetype java call SetMaxLen(100)
 au Filetype scala call SetMaxLen(80)
 au Filetype xml call SetMaxLen(100)
+au Filetype dart call SetMaxLen(80)
 
 " iTerm2 256-color mode
 set t_Co=256
