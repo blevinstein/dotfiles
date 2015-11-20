@@ -61,3 +61,6 @@
 [submodule ".vim/bundle/css.vim"]
 	path = .vim/bundle/css.vim
 	url = git://github.com/JulesWang/css.vim
+[submodule "/home/blevinstein/.tmux/plugins/tpm"]
+	path = /home/blevinstein/.tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm
