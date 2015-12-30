@@ -140,6 +140,7 @@ function tx {
     echo "Usage: tx <session> <command...>"
   fi
 }
+alias tkill="tmux kill-session -t"
 
 # Notes:
 #
