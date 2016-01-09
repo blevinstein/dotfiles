@@ -67,3 +67,6 @@
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = git@github.com:tpope/vim-surround.git
+[submodule ".vim/bundle/python-syntax"]
+	path = .vim/bundle/python-syntax
+	url = git@github.com:hdima/python-syntax.git
