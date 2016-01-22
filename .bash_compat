@@ -140,10 +140,16 @@ function ts {
 # Reattach a running tmux session
 alias tr="tmux attach -t"
 
-# Execute a command in a running tmux session
+# Execute command in a running tmux session
 function tx {
+  delay=0.5s
   if [ "$#" -ge 2 ]; then
-    tmux send-keys -t $1 "${@:2}" C-m
+    cmds=""
+    for cmd in "${@:2}"; do
+      echo $cmd
+      tmux send-keys -t $1 "$cmd" C-m
+      sleep $delay
+    done
   else
     echo "Too few arguments."
     echo "Usage: tx <session> <command...>"
