@@ -105,11 +105,11 @@ function copy {
 alias sl="screen -list"
 
 # Start a new screen session
-# Usage: ss <sessioname>
+# Usage: ss <session_name>
 alias ss="screen -S"
 
 # Reattach a running screen session
-# Usage: sr <sessionname>
+# Usage: sr <session_name>
 alias sr="screen -r"
 
 # Execute a command in a running screen session
@@ -127,7 +127,7 @@ function sx {
 # tmux commands
 
 # List all running tmux sessions
-# Usage: sl
+# Usage: tl
 alias tl="tmux list-sessions"
 function ts {
   if [ $1 ]; then
@@ -138,6 +138,7 @@ function ts {
 }
 
 # Reattach a running tmux session
+# Usage: tr <session_name>
 alias tr="tmux attach -t"
 
 # Execute commands in a running tmux session
@@ -147,6 +148,7 @@ function tx {
     cmds=""
     for cmd in "${@:2}"; do
       echo $cmd
+      # TODO: Offer optional send-keys -R (reset terminal state)
       tmux send-keys -t $1 "$cmd" C-m
       sleep $delay
     done
