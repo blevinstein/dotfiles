@@ -103,13 +103,16 @@ function copy {
 # List all running screen sessions
 # Usage: sl
 alias sl="screen -list"
+
 # Start a new screen session
 # Usage: ss <sessioname>
 alias ss="screen -S"
+
 # Reattach a running screen session
 # Usage: sr <sessionname>
 alias sr="screen -r"
-# Executes a command in a running screen session
+
+# Execute a command in a running screen session
 function sx {
   if [ "$#" -ge 2 ]; then
     # "stuff" is a screen command
@@ -122,7 +125,9 @@ function sx {
 }
 
 # tmux commands
-# These correspond to the above screen shortcuts, but start with t
+
+# List all running tmux sessions
+# Usage: sl
 alias tl="tmux list-sessions"
 function ts {
   if [ $1 ]; then
@@ -131,7 +136,11 @@ function ts {
     tmux new
   fi
 }
+
+# Reattach a running tmux session
 alias tr="tmux attach -t"
+
+# Execute a command in a running tmux session
 function tx {
   if [ "$#" -ge 2 ]; then
     tmux send-keys -t $1 "${@:2}" C-m
@@ -140,6 +149,10 @@ function tx {
     echo "Usage: tx <session> <command...>"
   fi
 }
+
+# Kill a tmux session
+# NOTE: Ctrl-A & to kill a single window
+# NOTE: Clrl-A x to kill a single pane
 alias tkill="tmux kill-session -t"
 
 # Notes:
