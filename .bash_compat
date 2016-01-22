@@ -140,7 +140,7 @@ function ts {
 # Reattach a running tmux session
 alias tr="tmux attach -t"
 
-# Execute command in a running tmux session
+# Execute commands in a running tmux session
 function tx {
   delay=0.5s
   if [ "$#" -ge 2 ]; then
