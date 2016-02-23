@@ -20,6 +20,7 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+set gdefault
 " tabs
 set smarttab
 set expandtab
