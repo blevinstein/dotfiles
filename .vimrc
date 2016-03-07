@@ -44,13 +44,13 @@ function! SetTab(width)
   let &l:tabstop = a:width
   let &l:shiftwidth = a:width
 endfunction
-call SetTab(2) " default
+au BufNewFile,BufReadCmd call SetTab(2) " default
 
 function! SetMaxLen(width)
   let &l:textwidth = a:width
   let &l:colorcolumn = a:width + 1
 endfunction
-call SetMaxLen(80) " default
+au BufNewFile,BufReadCmd call SetMaxLen(80) " default
 
 au Filetype make setlocal noexpandtab
 
@@ -61,6 +61,7 @@ au Filetype xml call SetMaxLen(100)
 au Filetype dart call SetMaxLen(80)
 
 au Filetype python call SetTab(2)
+au Filetype javascript call SetTab(2)
 
 " iTerm2 256-color mode
 set t_Co=256
@@ -87,6 +88,8 @@ au BufNewFile,BufRead *.sbt set filetype=scala
 
 " Make highlighting for html not suck
 au BufNewFile,BufRead *.html set filetype=xml
+
+au BufNewFile,BufRead *.js set filetype=javascript
 
 " Code Folding
 set foldmethod=indent
