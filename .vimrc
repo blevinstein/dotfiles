@@ -86,6 +86,9 @@ au BufNewFile,BufRead *.pde set filetype=java
 " Scala
 au BufNewFile,BufRead *.sbt set filetype=scala
 
+" Arduino
+au BufNewFile,BufRead *.ino set filetype=c
+
 " Make highlighting for html not suck
 au BufNewFile,BufRead *.html set filetype=xml
 
