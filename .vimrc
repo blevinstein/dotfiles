@@ -52,16 +52,22 @@ function! SetMaxLen(width)
 endfunction
 au BufNewFile,BufReadCmd call SetMaxLen(80) " default
 
-au Filetype make setlocal noexpandtab
-
-au Filetype html call SetMaxLen(100)
-au Filetype java call SetMaxLen(100)
-au Filetype scala call SetMaxLen(80)
-au Filetype xml call SetMaxLen(100)
 au Filetype dart call SetMaxLen(80)
 
-au Filetype python call SetTab(2)
+au Filetype html call SetMaxLen(100)
+au Filetype html call SetTab(2)
+
+au Filetype java call SetMaxLen(100)
+
 au Filetype javascript call SetTab(2)
+
+au Filetype make setlocal noexpandtab
+
+au Filetype python call SetTab(2)
+
+au Filetype scala call SetMaxLen(80)
+
+au Filetype xml call SetMaxLen(100)
 
 " iTerm2 256-color mode
 set t_Co=256
@@ -90,7 +96,7 @@ au BufNewFile,BufRead *.sbt set filetype=scala
 au BufNewFile,BufRead *.ino set filetype=c
 
 " Make highlighting for html not suck
-au BufNewFile,BufRead *.html set filetype=xml
+au BufNewFile,BufRead *.html set filetype=html
 
 au BufNewFile,BufRead *.js set filetype=javascript
 
