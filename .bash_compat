@@ -138,8 +138,11 @@ function ts {
 }
 
 # Reattach a running tmux session
-# Usage: tr <session_name>
-alias tr="tmux attach -t"
+# Usage: tt <session_name>
+#
+# Note: I would prefer to use "tr" but this conflicts with
+# http://ss64.com/bash/tr.html
+alias tt="tmux attach -t"
 
 # Execute commands in a running tmux session
 function tx {
