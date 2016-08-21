@@ -2,6 +2,7 @@ set nocompatible
 
 " Pathogen
 runtime bundle/vim-pathogen/autoload/pathogen.vim
+let g:pathogen_disabled = []
 call pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -116,8 +117,11 @@ let g:localvimrc_whitelist = "^.*$"
 autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
 autocmd FileType sh,ruby,python   let b:comment_leader = '# '
 autocmd FileType vim              let b:comment_leader = '" '
-noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+autocmd FileType javascript       let b:comment_leader = '// '
+" NERDCommenter
+let g:NERDCompactSexyComs = 1
+let g:NERDSpaceDelims = 1
+let g:NERDTrimTrailingWhitespace = 1
 
 " Shortcut for trailertrash.vim
 noremap <leader>tt :TrailerTrim<CR>
