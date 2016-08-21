@@ -73,3 +73,6 @@
 [submodule ".vim/bundle/idris-vim"]
 	path = .vim/bundle/idris-vim
 	url = git@github.com:idris-hackers/idris-vim.git
+[submodule ".vim/bundle/nerdcommenter"]
+	path = .vim/bundle/nerdcommenter
+	url = git@github.com:scrooloose/nerdcommenter
