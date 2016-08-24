@@ -63,3 +63,12 @@ function free-port {
   echo $port
 }
 
+# Scan for used ports
+# Usage: scan-ports 8000 8010 tcp
+function scan-ports {
+  for port in `seq $1 $2`; do
+    pid=`fuser $port/$3 2>&1 | awk '{print $2}'`
+    if [ -n "$pid" ]; then echo "$port used by process $pid"; fi
+  done
+}
+
