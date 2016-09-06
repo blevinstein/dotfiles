@@ -20,7 +20,6 @@
 !.racketrc
 !.screenrc
 !.tmux.conf
-!.vim/colors/*
 !.vimrc
 
 # include readme
