@@ -159,6 +159,9 @@ function tx {
   fi
 }
 
+# Create a new window in an existing tmux session
+alias tn="tmux new-window -t"
+
 # Kill a tmux session
 # NOTE: Ctrl-A & to kill a single window
 # NOTE: Clrl-A x to kill a single pane
