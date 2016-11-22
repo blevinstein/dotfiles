@@ -133,9 +133,9 @@ alias tl="tmux list-sessions"
 # Create a new tmux session
 function ts {
   if [ $1 ]; then
-    tmux_cmd="tmux new-session -s '$1' '${@:2}'"
+    tmux_cmd="tmux new-session -s '$1' ${@:2}"
   else
-    tmux_cmd="tmux new-session '${@:1}'"
+    tmux_cmd="tmux new-session ${@:1}"
   fi
   echo "$tmux_cmd"
   eval "$tmux_cmd"
