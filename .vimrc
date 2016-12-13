@@ -72,6 +72,8 @@ au Filetype xml call SetMaxLen(100)
 
 au Filetype text call SetTab(2)
 
+au Filetype scss call SetTab(2)
+
 " iTerm2 256-color mode
 set t_Co=256
 
