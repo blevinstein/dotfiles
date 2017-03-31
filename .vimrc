@@ -47,6 +47,9 @@ function! SetTab(width)
 endfunction
 au BufNewFile,BufReadCmd call SetTab(2) " default
 
+" wrap lines longer than max length
+set formatoptions+=t
+
 function! SetMaxLen(width)
   let &l:textwidth = a:width
   let &l:colorcolumn = a:width + 1
