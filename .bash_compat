@@ -143,10 +143,12 @@ function ts {
 
 # Reattach a running tmux session
 # Usage: tt <session_name>
-#
-# Note: I would prefer to use "tr" but this conflicts with
-# http://ss64.com/bash/tr.html
+# NOTE: "tr" conflicts with http://ss64.com/bash/tr.html
 alias tt="tmux attach -t"
+
+# Reattach a running tmux session in readonly mode
+# Usage: ttr <session_name>
+alias ttr="tmux attach -r -t"
 
 # Execute commands in a running tmux session
 # Usage: tx <session_name> <command...>
