@@ -75,7 +75,7 @@ function f {
 function git_diff_edit {
   if [ $1 ]; then
     temp="/tmp/diff.$$.tmp"
-    git diff $1 > "$temp"
+    git diff -R $1 > "$temp"
     vim $1 +"vertical diffpatch $temp"
     rm $temp
   else
