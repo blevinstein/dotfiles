@@ -68,6 +68,7 @@ au Filetype javascript call SetTab(2)
 au Filetype make setlocal noexpandtab
 
 au Filetype python call SetTab(2)
+au Filetype python call SetMaxLen(100)
 
 au Filetype scala call SetMaxLen(80)
 
