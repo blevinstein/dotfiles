@@ -131,6 +131,8 @@ function sx {
 alias tl="tmux list-sessions"
 
 # Create a new tmux session
+# NOTE: Append "-r" for readonly
+# NOTE: Append "-t [target-session]" to group with target-session
 function ts {
   if [ $1 ]; then
     tmux_cmd="tmux new-session -s '$1' ${@:2}"
@@ -168,8 +170,8 @@ function tx {
 alias tn="tmux new-window -t"
 
 # Kill a tmux session
-# NOTE: Ctrl-A & to kill a single window
-# NOTE: Clrl-A x to kill a single pane
+# NOTE: "Ctrl-A &" to kill a single window
+# NOTE: "Ctrl-A x" to kill a single pane
 alias tkill="tmux kill-session -t"
 
 # Notes:
