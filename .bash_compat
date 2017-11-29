@@ -175,3 +175,15 @@ alias tn="tmux new-window -t"
 # NOTE: "Ctrl-A &" to kill a single window
 # NOTE: "Ctrl-A x" to kill a single pane
 alias tkill="tmux kill-session -t"
+
+# Prints a comma-delimited list
+function comma() {
+  local IFS=,
+  echo "$*"
+}
+
+# Prints a colon-delimited list
+function colon() {
+  local IFS=:
+  echo "$*"
+}
