@@ -57,6 +57,8 @@ function cecho {
 
 # Runs program in another directory.
 # Usage: f <directory> <program> <args...>
+# To open all edited files in a git repo:
+# f [repo] [vim/intellij] `git diff --name-only`
 function f {
   if [ $1 ]; then
     if [ $2 ]; then
@@ -70,8 +72,8 @@ function f {
     echo "No directory provided."
   fi
 }
-# Edit a file with git diffs visible.
 # Usage: git_diff_edit <filename>
+# Edit a file with git diffs visible.
 function git_diff_edit {
   if [ $1 ]; then
     temp="/tmp/diff.$$.tmp"
@@ -173,8 +175,3 @@ alias tn="tmux new-window -t"
 # NOTE: "Ctrl-A &" to kill a single window
 # NOTE: "Ctrl-A x" to kill a single pane
 alias tkill="tmux kill-session -t"
-
-# Notes:
-#
-# To open all edited files in a git repo:
-# f [repo] [vim/intellij] `git diff --name-only`
