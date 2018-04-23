@@ -6,6 +6,9 @@ case $- in
       *) return;;
 esac
 
+# Functions and variables used by other bash scripts
+source ~/.bash_common
+
 # OS-specific bash settings
 if [[ `uname` == 'Darwin' ]]; then
   source ~/.bash_osx
@@ -14,10 +17,10 @@ if [[ `uname` == 'Linux' ]]; then
   source ~/.bash_linux
 fi
 
-# multiple-OS compatible bash settings
-source ~/.bash_compat
-
 # local settings
 if [ -a ~/.bash_local ]; then
   source ~/.bash_local
 fi
+
+# multiple-OS compatible bash settings
+source ~/.bash_compat
