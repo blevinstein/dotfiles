@@ -15,15 +15,21 @@ alias vim="vim -O"
 export EDITOR="vim"
 # open emacs without GUI
 alias emacs="emacs -nw"
-# git aware prompt
-export GITAWAREPROMPT=~/.bash/git-aware-prompt
-source $GITAWAREPROMPT/main.sh
-export PS1="$LOCAL_PS1_PREFIX$txtrst\[$bldgrn\]\u@$HOSTNAME:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\] \$ "
 alias git_get_branch="git rev-parse --abbrev-ref HEAD"
 # ant colorized output
 alias ant="ant -logger org.apache.tools.ant.listener.AnsiColorLogger"
-
 alias mkdir="mkdir -p"
+
+# Bash prompt
+# git aware prompt
+export GITAWAREPROMPT=~/.bash/git-aware-prompt
+source $GITAWAREPROMPT/main.sh
+# local scripts should call set_bash_prompt after updating LOCAL_PS1_PREFIX
+function set_bash_prompt {
+  export PS1="$LOCAL_PS1_PREFIX$txtrst\[$bldgrn\]\u@$HOSTNAME:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\] \$ "
+}
+set_bash_prompt
+
 
 # SHORTCUTS
 
@@ -35,6 +41,19 @@ bind -x '"\C-r":fg'
 # TOOLS
 
 export PATH=~/tools:$PATH
+
+# Color stuff copied from https://gist.github.com/brandonb927/3195465
+black='\033[0;30m'
+white='\033[0;37m'
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+blue='\033[0;34m'
+magenta='\033[0;35m'
+cyan='\033[0;36m'
+
+# Color reset
+alias uncolor='tput sgr0'
 
 # Color echo
 # Usage: cecho <message> <color>
