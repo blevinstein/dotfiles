@@ -26,7 +26,7 @@ export GITAWAREPROMPT=~/.bash/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 # local scripts should call set_bash_prompt after updating LOCAL_PS1_PREFIX
 function set_bash_prompt {
-  export PS1="$LOCAL_PS1_PREFIX$txtrst\[$bldgrn\]\u@$HOSTNAME:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\] \$ "
+  export PS1="$LOCAL_PS1_PREFIX$txtrst\[$bldgrn\]\u@$HOSTNAME:\[$bldblu\]\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\n\$ "
 }
 set_bash_prompt
 
