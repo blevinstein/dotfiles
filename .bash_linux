@@ -31,6 +31,9 @@ alias cp='cp -r'
 
 # TOOLS
 
+# needed for pipenv, see https://github.com/pypa/pipenv/issues/2122
+export PATH="$HOME/.local/bin:$PATH"
+
 # Used for automatically running build commands.
 # Usage: onchange <directory> <command> <args...>
 function onchange {
