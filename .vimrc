@@ -82,6 +82,8 @@ au Filetype scss call SetTab(2)
 
 au Filetype go call SetTab(2)
 
+au Filetype soy call SetMaxLen(100)
+
 " iTerm2 256-color mode
 set t_Co=256
 
