@@ -1,0 +1,13 @@
+
+[ui]
+username = blevinstein
+merge = vim_lpane
+
+[extensions]
+share =
+
+[merge-tools]
+vim_lpane.executable=vim
+vim_lpane.args=-f $output
+vim_lpane.premerge=keep-merge3
+vim_lpane.check=conflicts
