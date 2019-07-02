@@ -5,6 +5,7 @@ merge = vim_lpane
 
 [extensions]
 share =
+purge =
 
 [merge-tools]
 vim_lpane.executable=vim
