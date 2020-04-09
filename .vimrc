@@ -82,6 +82,8 @@ au Filetype scss call SetTab(2)
 
 au Filetype go call SetTab(2)
 
+au Filetype c,cpp call SetTab(2)
+
 au Filetype soy call SetMaxLen(100)
 
 au Filetype sh call SetTab(2)
