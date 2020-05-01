@@ -84,6 +84,8 @@ au Filetype go call SetTab(2)
 
 au Filetype soy call SetMaxLen(100)
 
+au Filetype sh call SetTab(2)
+
 " iTerm2 256-color mode
 set t_Co=256
 
@@ -109,6 +111,8 @@ au BufNewFile,BufRead *.sbt set filetype=scala
 
 " Arduino
 au BufNewFile,BufRead *.ino set filetype=c
+
+au BufNewFile,BufRead *.sh set filetype=sh
 
 " Make highlighting for html not suck
 au BufNewFile,BufRead *.html set filetype=html
