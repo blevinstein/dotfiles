@@ -196,3 +196,7 @@ function colon() {
   local IFS=:
   echo "$*"
 }
+
+function npm-do() {
+(PATH=$(npm bin):$PATH; eval $@;)
+}
