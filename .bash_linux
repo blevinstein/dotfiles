@@ -26,6 +26,9 @@ stty -ixon
 alias echo='echo -e'
 # recursive copy
 alias cp='cp -r'
+# copy/paste clipboard commands compatible with macosx
+alias pbcopy="xclip -selection c"
+alias pbpaste="xclip -selection clipboard -o"
 
 # TOOLS
 
