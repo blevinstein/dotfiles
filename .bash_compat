@@ -64,23 +64,6 @@ function cecho {
   return
 }
 
-# Runs program in another directory.
-# Usage: f <directory> <program> <args...>
-# To open all edited files in a git repo:
-# f [repo] [vim/intellij] `git diff --name-only`
-function f {
-  if [ $1 ]; then
-    if [ $2 ]; then
-      pushd $1 >> /dev/null
-      $2 "${@:3}"
-      popd >> /dev/null
-    else
-      echo "No program name provided."
-    fi
-  else
-    echo "No directory provided."
-  fi
-}
 # Usage: git_diff_edit <filename>
 # Edit a file with git diffs visible.
 function git_diff_edit {
@@ -92,21 +75,6 @@ function git_diff_edit {
   else
     echo "No filename provided."
   fi
-}
-
-# execute a command in background
-function x {
-  "$@" &
-  disown
-}
-
-# Temporarily ignore a file
-alias gitignore='git update-index --skip-worktree'
-alias gitsee='git update-index --no-skip-worktree'
-
-# Better copy
-function copy {
-  rsync -a -P --info=progress2 $1 $2
 }
 
 # screen commands
@@ -197,6 +165,14 @@ function colon() {
   echo "$*"
 }
 
+# Node-related
+
 function npm-do() {
 (PATH=$(npm bin):$PATH; eval $@;)
 }
+
+if [[ -d "$HOME/.nvm" ]]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
