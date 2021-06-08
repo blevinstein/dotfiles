@@ -79,3 +79,6 @@
 [submodule ".vim/bundle/vim-lsc"]
 	path = .vim/bundle/vim-lsc
 	url = git@github.com:natebosch/vim-lsc
+[submodule ".vim/bundle/kotlin-vim"]
+	path = .vim/bundle/kotlin-vim
+	url = https://github.com/udalov/kotlin-vim
