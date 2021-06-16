@@ -56,7 +56,11 @@ function! SetMaxLen(width)
 endfunction
 au BufNewFile,BufReadCmd call SetMaxLen(80) " default
 
+au Filetype c,cpp call SetTab(2)
+
 au Filetype dart call SetMaxLen(80)
+
+au Filetype go call SetTab(2)
 
 au Filetype html call SetMaxLen(100)
 au Filetype html call SetTab(2)
@@ -64,10 +68,12 @@ au Filetype html call SetTab(2)
 au Filetype java call SetTab(2)
 au Filetype java call SetMaxLen(100)
 
-au Filetype json call SetTab(2)
-
 au Filetype javascript call SetTab(2)
 au Filetype javascript call SetMaxLen(80)
+
+au Filetype json call SetTab(2)
+
+au Filetype kotlin call SetTab(4)
 
 au Filetype make setlocal noexpandtab
 
@@ -76,19 +82,15 @@ au Filetype python call SetMaxLen(100)
 
 au Filetype scala call SetMaxLen(80)
 
-au Filetype xml call SetMaxLen(100)
-
-au Filetype text call SetTab(2)
-
 au Filetype scss call SetTab(2)
 
-au Filetype go call SetTab(2)
-
-au Filetype c,cpp call SetTab(2)
+au Filetype sh call SetTab(2)
 
 au Filetype soy call SetMaxLen(100)
 
-au Filetype sh call SetTab(2)
+au Filetype text call SetTab(2)
+
+au Filetype xml call SetMaxLen(100)
 
 " iTerm2 256-color mode
 set t_Co=256
