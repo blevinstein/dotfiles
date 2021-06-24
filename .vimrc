@@ -57,6 +57,7 @@ endfunction
 au BufNewFile,BufReadCmd call SetMaxLen(80) " default
 
 au Filetype c,cpp call SetTab(2)
+au Filetype css call SetTab(2)
 
 au Filetype dart call SetMaxLen(80)
 
