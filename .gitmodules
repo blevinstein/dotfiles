@@ -82,3 +82,6 @@
 [submodule ".vim/bundle/kotlin-vim"]
 	path = .vim/bundle/kotlin-vim
 	url = https://github.com/udalov/kotlin-vim
+[submodule ".vim/bundle/vim-solidity"]
+	path = .vim/bundle/vim-solidity
+	url = git@github.com:tomlion/vim-solidity
