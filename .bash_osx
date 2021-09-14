@@ -14,7 +14,6 @@ export PATH=/usr/local/share/npm/bin:$PATH       # npm
 alias prolog=swipl
 # Go
 export GOROOT=/usr/local/go
-export GOPATH=~/dev/go:$GOPATH
 # Android
 #export PATH=~/android-sdk-macosx/tools:$PATH
 #export PATH=~/android-sdk-macosx/platform-tools:$PATH
