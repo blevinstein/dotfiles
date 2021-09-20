@@ -5,6 +5,6 @@ function ecr-login {
 }
 
 function push-image {
-  docker tag $1 $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$2:latest
-  docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$2:latest
+  docker tag $2 $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$1:latest
+  docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$1:latest
 }
