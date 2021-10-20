@@ -165,6 +165,12 @@ function colon() {
   echo "$*"
 }
 
+# Prints a space-delimited list
+function space() {
+  local IFS=" "
+  echo "$*"
+}
+
 # Node-related
 
 function npm-do() {
