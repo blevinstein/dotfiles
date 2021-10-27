@@ -54,7 +54,7 @@ function! SetMaxLen(width)
   let &l:textwidth = a:width
   let &l:colorcolumn = a:width + 1
 endfunction
-au BufNewFile,BufReadCmd call SetMaxLen(80) " default
+au BufNewFile,BufReadCmd call SetMaxLen(100) " default
 
 au Filetype c,cpp call SetTab(2)
 au Filetype css call SetTab(2)
@@ -70,7 +70,7 @@ au Filetype java call SetTab(2)
 au Filetype java call SetMaxLen(100)
 
 au Filetype javascript call SetTab(2)
-au Filetype javascript call SetMaxLen(80)
+au Filetype javascript call SetMaxLen(100)
 
 au Filetype json call SetTab(2)
 
@@ -86,6 +86,8 @@ au Filetype scala call SetMaxLen(80)
 au Filetype scss call SetTab(2)
 
 au Filetype sh call SetTab(2)
+
+au Filetype solidity call SetTab(2)
 
 au Filetype soy call SetMaxLen(100)
 
