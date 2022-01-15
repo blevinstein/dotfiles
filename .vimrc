@@ -126,6 +126,7 @@ au BufNewFile,BufRead *.sh set filetype=sh
 " Make highlighting for html not suck
 au BufNewFile,BufRead *.html set filetype=html
 
+au BufNewFile,BufRead *.ts set filetype=javascript
 au BufNewFile,BufRead *.js set filetype=javascript
 
 " Code Folding
