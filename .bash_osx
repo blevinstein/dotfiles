@@ -32,3 +32,7 @@ alias grep="grep --color"
 function onchange {
   fswatch -o $1 | xargs -n1 -I{} $2 "${@:3}"
 }
+
+function bell {
+  tput bel
+}
