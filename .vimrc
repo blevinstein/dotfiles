@@ -130,8 +130,7 @@ au BufNewFile,BufRead *.ts set filetype=javascript
 au BufNewFile,BufRead *.js set filetype=javascript
 
 " Code Folding
-set foldmethod=indent
-set foldlevelstart=20 " disable most folding by default
+set nofoldenable " disable folding
 " shortcut for folding, e.g. 1<leader>z to set foldlevel=1
 noremap <silent> <leader>z :<C-U>exe "set foldlevel=".count<CR>
 
