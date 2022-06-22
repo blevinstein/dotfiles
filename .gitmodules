@@ -85,3 +85,6 @@
 [submodule ".vim/bundle/vim-solidity"]
 	path = .vim/bundle/vim-solidity
 	url = git@github.com:tomlion/vim-solidity
+[submodule ".vim/bundle/vim-circom-syntax"]
+	path = .vim/bundle/vim-circom-syntax
+	url = git@github.com:iden3/vim-circom-syntax
