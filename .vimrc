@@ -71,6 +71,7 @@ au Filetype java call SetMaxLen(100)
 
 au Filetype javascript call SetTab(2)
 au Filetype javascript call SetMaxLen(100)
+au Filetype javascriptreact call SetTab(2)
 
 au Filetype json call SetTab(2)
 
