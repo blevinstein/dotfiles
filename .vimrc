@@ -130,6 +130,9 @@ au BufNewFile,BufRead *.html set filetype=html
 au BufNewFile,BufRead *.ts set filetype=javascript
 au BufNewFile,BufRead *.js set filetype=javascript
 
+au BufNewFile,BufRead *.jsx set filetype=javascriptreact
+au BufNewFile,BufRead *.tsx set filetype=javascriptreact
+
 " Code Folding
 set nofoldenable " disable folding
 " shortcut for folding, e.g. 1<leader>z to set foldlevel=1
