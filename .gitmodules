@@ -88,3 +88,6 @@
 [submodule ".vim/bundle/vim-circom-syntax"]
 	path = .vim/bundle/vim-circom-syntax
 	url = git@github.com:iden3/vim-circom-syntax
+[submodule ".vim/bundle/context.vim"]
+	path = .vim/bundle/context.vim
+	url = git@github.com:wellle/context.vim
