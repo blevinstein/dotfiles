@@ -91,3 +91,9 @@
 [submodule ".vim/bundle/context.vim"]
 	path = .vim/bundle/context.vim
 	url = git@github.com:wellle/context.vim
+[submodule ".vim/bundle/typescript-vim"]
+	path = .vim/bundle/typescript-vim
+	url = git@github.com:leafgarland/typescript-vim
+[submodule ".vim/bundle/vim-jsx-pretty"]
+	path = .vim/bundle/vim-jsx-pretty
+	url = git@github.com:MaxMEllon/vim-jsx-pretty
