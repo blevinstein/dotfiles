@@ -70,8 +70,10 @@ au Filetype java call SetTab(2)
 au Filetype java call SetMaxLen(100)
 
 au Filetype javascript call SetTab(2)
+au Filetype typescript call SetTab(2)
 au Filetype javascript call SetMaxLen(100)
 au Filetype javascriptreact call SetTab(2)
+au Filetype typescriptreact call SetTab(2)
 
 au Filetype json call SetTab(2)
 
@@ -95,6 +97,9 @@ au Filetype soy call SetMaxLen(100)
 au Filetype text call SetTab(2)
 
 au Filetype xml call SetMaxLen(100)
+
+au Filetype proto call SetTab(2)
+au Filetype proto call SetMaxLen(100)
 
 " iTerm2 256-color mode
 set t_Co=256
