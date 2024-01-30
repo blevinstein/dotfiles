@@ -48,7 +48,7 @@
 	url = git@github.com:pangloss/vim-javascript
 [submodule ".vim/bundle/vim-fugitive"]
 	path = .vim/bundle/vim-fugitive
-	url = git://github.com/tpope/vim-fugitive.git
+	url = git@github.com:tpope/vim-fugitive.git
 [submodule ".vim/bundle/vim-scala"]
 	path = .vim/bundle/vim-scala
 	url = git@github.com:derekwyatt/vim-scala.git
@@ -57,10 +57,10 @@
 	url = git@github.com:csexton/trailertrash.vim
 [submodule ".vim/bundle/CamelCaseMotion"]
 	path = .vim/bundle/CamelCaseMotion
-	url = git://github.com/bkad/CamelCaseMotion
+	url = git@github.com:bkad/CamelCaseMotion
 [submodule ".vim/bundle/css.vim"]
 	path = .vim/bundle/css.vim
-	url = git://github.com/JulesWang/css.vim
+	url = git@github.com:JulesWang/css.vim
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = git@github.com:tmux-plugins/tpm
