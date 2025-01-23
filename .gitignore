@@ -12,6 +12,7 @@
 !.bash_profile
 !.bashrc
 !.emacs
+!.emacs.d
 !.gitconfig
 !.gitignore
 !.gitignore_global
@@ -20,12 +21,16 @@
 !.racketrc
 !.screenrc
 !.tmux.conf
+!.tmux/plugins
+!.vim/bundle
 !.vimrc
 
-# include readme
 !Readme.md
 
-# include tools
+# tools
 !tools
 !tools/*
+
+# setup
+!setup.sh
 

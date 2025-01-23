@@ -1,9 +1,10 @@
 set nocompatible
 
 " Pathogen
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-let g:pathogen_disabled = []
-call pathogen#infect()
+"runtime bundle/vim-pathogen/autoload/pathogen.vim
+"let g:pathogen_disabled = []
+"call pathogen#infect()
+
 syntax on
 filetype plugin indent on
 
