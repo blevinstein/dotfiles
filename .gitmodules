@@ -1,15 +1,6 @@
-[submodule ".vim/bundle/ctrlp.vim"]
-	path = .vim/bundle/ctrlp.vim
-	url = git@github.com:kien/ctrlp.vim
 [submodule ".bash/git-aware-prompt"]
 	path = .bash/git-aware-prompt
 	url = git@github.com:jimeh/git-aware-prompt.git
-[submodule ".vim/bundle/localvimrc"]
-	path = .vim/bundle/localvimrc
-	url = git@github.com:vim-scripts/localvimrc.git
-[submodule ".vim/bundle/django.vim"]
-	path = .vim/bundle/django.vim
-	url = git@github.com:vim-scripts/django.vim.git
 [submodule ".emacs.d/js-comint"]
 	path = .emacs.d/js-comint
 	url = git@github.com:adolfosousa/emacs-js-comint-mode.git
@@ -19,69 +10,6 @@
 [submodule ".emacs.d/smooth-scrolling"]
 	path = .emacs.d/smooth-scrolling
 	url = git@github.com:aspiers/smooth-scrolling.git
-[submodule ".vim/bundle/vim-rails"]
-	path = .vim/bundle/vim-rails
-	url = git@github.com:tpope/vim-rails.git
-[submodule ".vim/bundle/vim-bundler"]
-	path = .vim/bundle/vim-bundler
-	url = git@github.com:tpope/vim-bundler.git
-[submodule ".vim/bundle/rust.vim"]
-	path = .vim/bundle/rust.vim
-	url = git@github.com:wting/rust.vim.git
-[submodule ".vim/bundle/vim-pathogen"]
-	path = .vim/bundle/vim-pathogen
-	url = git@github.com:tpope/vim-pathogen
-[submodule ".vim/bundle/vim-ant"]
-	path = .vim/bundle/vim-ant
-	url = git@github.com:teneighty/vim-ant
-[submodule ".vim/bundle/vim-autoformat"]
-	path = .vim/bundle/vim-autoformat
-	url = git@github.com:Chiel92/vim-autoformat.git
-[submodule ".vim/bundle/dart-vim"]
-	path = .vim/bundle/dart-vim
-	url = git@github.com:dart-lang/dart-vim-plugin.git
-[submodule ".vim/bundle/vim-racket"]
-	path = .vim/bundle/vim-racket
-	url = git@github.com:wlangstroth/vim-racket.git
-[submodule ".vim/bundle/vim-javascript"]
-	path = .vim/bundle/vim-javascript
-	url = git@github.com:pangloss/vim-javascript
-[submodule ".vim/bundle/vim-scala"]
-	path = .vim/bundle/vim-scala
-	url = git@github.com:derekwyatt/vim-scala.git
-[submodule ".vim/bundle/trailertrash.vim"]
-	path = .vim/bundle/trailertrash.vim
-	url = git@github.com:csexton/trailertrash.vim
-[submodule ".vim/bundle/CamelCaseMotion"]
-	path = .vim/bundle/CamelCaseMotion
-	url = git@github.com:bkad/CamelCaseMotion
-[submodule ".vim/bundle/css.vim"]
-	path = .vim/bundle/css.vim
-	url = git@github.com:JulesWang/css.vim
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = git@github.com:tmux-plugins/tpm
-[submodule ".vim/bundle/python-syntax"]
-	path = .vim/bundle/python-syntax
-	url = git@github.com:hdima/python-syntax.git
-[submodule ".vim/bundle/vim-lsc"]
-	path = .vim/bundle/vim-lsc
-	url = git@github.com:natebosch/vim-lsc
-[submodule ".vim/bundle/kotlin-vim"]
-	path = .vim/bundle/kotlin-vim
-	url = https://github.com/udalov/kotlin-vim
-[submodule ".vim/bundle/vim-solidity"]
-	path = .vim/bundle/vim-solidity
-	url = git@github.com:tomlion/vim-solidity
-[submodule ".vim/bundle/vim-circom-syntax"]
-	path = .vim/bundle/vim-circom-syntax
-	url = git@github.com:iden3/vim-circom-syntax
-[submodule ".vim/bundle/context.vim"]
-	path = .vim/bundle/context.vim
-	url = git@github.com:wellle/context.vim
-[submodule ".vim/bundle/typescript-vim"]
-	path = .vim/bundle/typescript-vim
-	url = git@github.com:leafgarland/typescript-vim
-[submodule ".vim/bundle/vim-jsx-pretty"]
-	path = .vim/bundle/vim-jsx-pretty
-	url = git@github.com:MaxMEllon/vim-jsx-pretty
