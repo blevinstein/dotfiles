@@ -5,6 +5,34 @@ set nocompatible
 "let g:pathogen_disabled = []
 "call pathogen#infect()
 
+" vim-plug
+call plug#begin()
+
+Plug 'vim-scripts/localvimrc'
+Plug 'vim-autoformat/vim-autoformat'
+Plug 'csexton/trailertrash.vim'
+Plug 'bkad/CamelCaseMotion'
+Plug 'wellle/context.vim'
+
+Plug 'pangloss/vim-javascript'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'leafgarland/typescript-vim'
+Plug 'JulesWang/css.vim'
+
+"Plug 'natebosch/vim-lsc'
+"Plug 'vim-scripts/django'
+"Plug 'tpope/vim-rails'
+"Plug 'tpope/vim-bundler'
+"Plug 'wting/rust.vim'
+"Plug 'dart-lang/dart-vim-plugin'
+"Plug 'wlangstroth/vim-racket'
+"Plug 'derekwyatt/vim-scala'
+"Plug 'udalov/kotlin-vim'
+"Plug 'tomlion/vim-solidity'
+"Plug 'iden3/vim-circom-syntax'
+
+call plug#end()
+
 syntax on
 filetype plugin indent on
 
