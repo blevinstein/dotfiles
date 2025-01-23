@@ -151,10 +151,6 @@ autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
 autocmd FileType sh,ruby,python   let b:comment_leader = '# '
 autocmd FileType vim              let b:comment_leader = '" '
 autocmd FileType javascript       let b:comment_leader = '// '
-" NERDCommenter
-let g:NERDCompactSexyComs = 1
-let g:NERDSpaceDelims = 1
-let g:NERDTrimTrailingWhitespace = 1
 
 " Shortcut for trailertrash.vim
 noremap <leader>tt :TrailerTrim<CR>
