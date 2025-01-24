@@ -13,6 +13,7 @@ Plug 'vim-autoformat/vim-autoformat'
 Plug 'csexton/trailertrash.vim'
 Plug 'bkad/CamelCaseMotion'
 Plug 'wellle/context.vim'
+Plug 'tpope/vim-surround'
 
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
