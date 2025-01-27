@@ -185,6 +185,9 @@ autocmd FileType javascript       let b:comment_leader = '// '
 " Shortcut for trailertrash.vim
 noremap <leader>tt :TrailerTrim<CR>
 
+" Shortcut for CamelCaseMotion
+let g:camelcasemotion_key = ","
+
 " Allow for computer-specific differences
 if filereadable(expand("~/.vimrc_local"))
   source ~/.vimrc_local
