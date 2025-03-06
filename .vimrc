@@ -193,3 +193,6 @@ if filereadable(expand("~/.vimrc_local"))
   source ~/.vimrc_local
 endif
 
+" Allow using visual block mode in environments (e.g. WSL) that affect Ctrl-V
+:command! Vb :execute "normal! \<C-v>"
+
