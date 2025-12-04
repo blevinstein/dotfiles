@@ -24,7 +24,7 @@ Plug 'JulesWang/css.vim'
 "Plug 'vim-scripts/django'
 "Plug 'tpope/vim-rails'
 "Plug 'tpope/vim-bundler'
-"Plug 'wting/rust.vim'
+Plug 'rust-lang/rust.vim'
 "Plug 'dart-lang/dart-vim-plugin'
 "Plug 'wlangstroth/vim-racket'
 "Plug 'derekwyatt/vim-scala'
@@ -130,6 +130,8 @@ au Filetype xml call SetMaxLen(100)
 
 au Filetype proto call SetTab(2)
 au Filetype proto call SetMaxLen(100)
+
+au Filetype rust call SetTab(2)
 
 " iTerm2 256-color mode
 set t_Co=256
