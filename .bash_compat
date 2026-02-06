@@ -189,3 +189,25 @@ fi
 
 # Used for fixing copy/paste behavior when claude screws up a terminal
 alias fixpaste='printf "\e[?2004l"'
+
+# Spin up a dedicated worktree and launch the cursor agent
+workagent() {
+    local feature_name=$1
+    local base_branch=$2
+
+    if [ -z "$feature_name" ]; then
+        echo "Usage: workagent <feature-name> [base-branch]"
+        return 1
+    fi
+
+    local target_path=".cursor/worktrees/${feature_name}"
+
+    if [ ! -d "$target_path" ]; then
+        echo "Creating worktree '$feature_name' based on '$base_branch'..."
+        git worktree add "$target_path" -b "$feature_name" $base_branch
+    else
+        echo "Worktree exists. Reusing..."
+    fi
+
+    agent --workspace "$target_path"
+}
