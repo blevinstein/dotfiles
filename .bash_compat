@@ -201,7 +201,7 @@ workagent() {
         return 1
     fi
 
-    local target_path=".cursor/worktrees/${feature_name}"
+    local target_path="$HOME/.agent/worktrees/${feature_name}"
 
     if [ ! -d "$target_path" ]; then
         echo "Creating worktree '$feature_name' based on '$base_branch'..."
