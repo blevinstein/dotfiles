@@ -204,8 +204,13 @@ workagent() {
     local target_path="$HOME/.agent/worktrees/${feature_name}"
 
     if [ ! -d "$target_path" ]; then
-        echo "Creating worktree '$feature_name' based on '$base_branch'..."
-        git worktree add "$target_path" -b "$feature_name" $base_branch
+        if [ "$feature_name" = "$base_branch" ]; then
+            echo "Creating worktree for '$base_branch'..."
+            git worktree add "$target_path" "$base_branch"
+        else
+            echo "Creating new worktree branch '$feature_name' based on '$base_branch'..."
+            git worktree add "$target_path" -b "$feature_name" $base_branch
+        fi
     else
         echo "Worktree exists. Reusing..."
     fi
