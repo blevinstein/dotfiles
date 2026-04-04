@@ -9,6 +9,29 @@
       "type": "stdio",
       "command": "npx",
       "args": [ "-y", "@steipete/peekaboo-mcp" ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "cloudwatch": {
+      "command": "uvx",
+      "args": [ "awslabs.cloudwatch-mcp-server" ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "INFO"
+      }
+    },
+    "time-server": {
+      "command": "uvx",
+      "args": ["mcp-server-time", "--local-timezone=America/Denver"],
+      "env": {}
     }
   }
 }
