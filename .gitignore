@@ -34,3 +34,10 @@
 # setup
 !setup.sh
 
+# claude skills generally source-controlled, with some exceptions...
+!.claude/
+!.claude/skills/
+!.claude/skills/**
+# installed by peon-ping https://github.com/PeonPing/peon-ping
+.claude/skills/peon-ping-*/**
+
