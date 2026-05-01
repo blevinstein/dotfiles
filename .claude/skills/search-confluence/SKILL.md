@@ -1,9 +1,19 @@
 ---
 name: search-confluence
-description: Search the organization's Confluence wiki for documentation, runbooks, specs, and meeting notes via the REST API. Use when the user asks to find, search, or look up information in Confluence, or references Confluence pages, wiki docs, or internal documentation.
+description: Search the organization's Confluence wiki for documentation, runbooks, specs, and meeting notes via the REST API. Use when the user asks to find, search, or look up information in Confluence, or references Confluence pages, wiki docs, or internal documentation. Also supports creating and updating pages when the user explicitly requests it.
 ---
 
-# Search Confluence
+# Search & Write Confluence
+
+## GUARDRAILS — Writing to Confluence
+
+**NEVER create, update, or delete Confluence pages without explicit user instruction.** Specifically:
+
+- Do **not** proactively create pages even if you think documentation would be useful.
+- Do **not** create a page without first confirming the intended parent location with the user.
+- Do **not** update or overwrite an existing page without explicit user confirmation.
+- Always show the user the target URL after a write operation so they can verify the result.
+- Treat Confluence writes as irreversible — think before you POST.
 
 ## Prerequisites
 
@@ -168,9 +178,115 @@ acli confluence page view --id ID   # View a specific page
 
 If acli reports `unauthorized`, re-run the login commands from the Login section above.
 
+## Creating a Page
+
+Use `POST /wiki/rest/api/content`. Write the body to a temp file first (avoids shell quoting issues with large payloads):
+
+```bash
+cat << 'PAYLOAD' > /tmp/confluence-page.json
+{
+  "type": "page",
+  "title": "Page Title",
+  "ancestors": [{"id": "PARENT_PAGE_ID"}],
+  "space": {"key": "SPACE_KEY"},
+  "body": {
+    "storage": {
+      "representation": "storage",
+      "value": "<p>Page body in Confluence storage format (HTML-like XML).</p>"
+    }
+  }
+}
+PAYLOAD
+
+curl -s -u "$ACLI_EMAIL:$ACLI_TOKEN" \
+  -X POST \
+  -H "Content-Type: application/json" \
+  "https://$ACLI_DOMAIN/wiki/rest/api/content" \
+  -d @/tmp/confluence-page.json \
+  | jq '{id, title, webui: ._links.webui}'
+```
+
+The response `._links.webui` gives the relative path; prefix with `https://$ACLI_DOMAIN/wiki` for the full URL.
+
+### Getting the Space Key
+
+You need the space key (`CET`, `~username`, etc.) to create a page. Fetch it from any existing page in that space:
+
+```bash
+curl -s -u "$ACLI_EMAIL:$ACLI_TOKEN" \
+  "https://$ACLI_DOMAIN/wiki/rest/api/content/PAGE_ID?expand=space" \
+  | jq '{spaceKey: .space.key}'
+```
+
+### Confluence Storage Format
+
+Page bodies use Confluence storage format — HTML-like XML. Key conversions from Markdown:
+
+| Markdown | Storage format |
+|---|---|
+| `# Heading` | `<h1>Heading</h1>` |
+| `**bold**` | `<strong>bold</strong>` |
+| `` `code` `` | `<code>code</code>` |
+| `[text](url)` | `<a href="url">text</a>` |
+| `- item` | `<ul><li>item</li></ul>` |
+| `1. item` | `<ol><li>item</li></ol>` |
+| Table | `<table><tbody><tr><th>...</th></tr><tr><td>...</td></tr></tbody></table>` |
+| `<` / `>` in text | `&lt;` / `&gt;` |
+| `'` in text | `&apos;` |
+
+### Checking for Duplicate Titles
+
+Confluence rejects pages with a duplicate title in the same space (HTTP 400 with `"A page already exists with the same TITLE"`). Before creating, search for the title first:
+
+```bash
+curl -s -G -u "$ACLI_EMAIL:$ACLI_TOKEN" \
+  "https://$ACLI_DOMAIN/wiki/rest/api/search" \
+  --data-urlencode 'cql=type=page AND title="Exact Title" AND space=KEY' \
+  | jq -r '.results[] | "\(.content.id)\t\(.title)"'
+```
+
+If a page already exists with that title, decide with the user whether to update it or use a different title.
+
+## Updating an Existing Page
+
+Updating requires the current version number (Confluence increments it on each save):
+
+```bash
+# Get current version
+curl -s -u "$ACLI_EMAIL:$ACLI_TOKEN" \
+  "https://$ACLI_DOMAIN/wiki/rest/api/content/PAGE_ID?expand=version" \
+  | jq '.version.number'
+
+# Then PUT with version + 1
+curl -s -u "$ACLI_EMAIL:$ACLI_TOKEN" \
+  -X PUT \
+  -H "Content-Type: application/json" \
+  "https://$ACLI_DOMAIN/wiki/rest/api/content/PAGE_ID" \
+  -d '{
+    "type": "page",
+    "title": "Page Title",
+    "version": {"number": CURRENT_VERSION_PLUS_ONE},
+    "body": {
+      "storage": {
+        "representation": "storage",
+        "value": "<p>Updated content.</p>"
+      }
+    }
+  }' | jq '{id, title, webui: ._links.webui}'
+```
+
 ## Workflow
 
+### Read-only (searching)
 1. **Search** with CQL to find relevant pages
 2. **Review** titles and excerpts using `jq` projections — don't dump full JSON
 3. **Fetch** full page content for pages that look relevant
 4. **Summarize** findings for the user, including links (`https://$ACLI_DOMAIN/wiki` + `url` from results)
+
+### Write workflow (only when explicitly instructed)
+1. **Confirm** the target space and parent page with the user before writing
+2. **Check** for duplicate title in the target space
+3. **Get the space key** from an existing page if not already known
+4. **Write payload to a temp file** to avoid shell quoting issues
+5. **POST** to create (or PUT to update) the page
+6. **Report** the full page URL to the user so they can verify
