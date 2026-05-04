@@ -4,6 +4,11 @@
 			"type": "stdio",
 			"command": "uvx",
 			"args": [ "mcp-server-fetch" ]
-		}
+		},
+    "peekaboo": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [ "-y", "@steipete/peekaboo-mcp" ]
+    }
   }
 }

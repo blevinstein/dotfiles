@@ -1,3 +1,12 @@
+---
+name: use-vet
+description: >-
+  Intercepts curl commands and routes them through the `vet` security gate.
+  Use whenever you are about to run `curl` — prefix it with `vet` instead
+  (e.g. `vet curl https://…`). If vet exits 78 (parse error / daemon down),
+  retry without the prefix. If it exits 77 (denied), stop and tell the user.
+---
+
 # Skill: Prefix commands with `vet`
 
 ## Purpose
