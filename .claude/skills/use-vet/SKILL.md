@@ -1,10 +1,18 @@
 ---
 name: use-vet
 description: >-
-  Intercepts curl commands and routes them through the `vet` security gate.
-  Use whenever you are about to run `curl` — prefix it with `vet` instead
-  (e.g. `vet curl https://…`). If vet exits 78 (parse error / daemon down),
-  retry without the prefix. If it exits 77 (denied), stop and tell the user.
+  ALWAYS prefix every `curl` invocation with `vet` (e.g. `vet curl https://…`)
+  — no exceptions. This applies to ALL curl usage: API calls, downloads,
+  health checks, debugging, one-liners, scripts, anything. Never run a bare
+  `curl` first and only fall back to `vet` if something fails — start with
+  `vet curl` every single time. The ONLY situation in which you may run bare
+  `curl` is when `vet` itself is unavailable: it is not installed (`command
+  -v vet` is empty) OR a previous `vet curl` invocation exited 78 (parse
+  error / daemon unreachable) for this exact command. If `vet` exits 77
+  (denied by policy), STOP — do not retry without the prefix; report the
+  block to the user and ask them to update their allowlist. Use this skill
+  every time you reach for `curl`, including inside pipelines, command
+  substitutions, and shell scripts.
 ---
 
 # Skill: Prefix commands with `vet`
