@@ -40,4 +40,10 @@
 !.claude/skills/**
 # installed by peon-ping https://github.com/PeonPing/peon-ping
 .claude/skills/peon-ping-*/**
+# folder used by codex for configuration
+.claude/skills/.system
+
+# this is a symlink to .claude/skills so that codex gets the same skills
+!.codex
+!.codex/skills/
 
