@@ -12,7 +12,7 @@ Read `TODO.md` and choose the best implementable unchecked task. Prefer tasks
 that are concrete, self-contained, and in earlier or higher-priority sections.
 If the user names a specific TODO item, plan that item instead.
 
-Return a plan only. Do not implement the task.
+Return a plan only. Do not implement the task. Switch to plan mode if applicable in your environment.
 
 If every task is done or the remaining tasks are too ambiguous to plan well,
 say so and ask the user which area to target.
