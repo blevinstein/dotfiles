@@ -1,15 +1,5 @@
 {
-  "mcpServers": {
-		"fetch": {
-			"type": "stdio",
-			"command": "uvx",
-			"args": [ "mcp-server-fetch" ]
-		},
-    "peekaboo": {
-      "type": "stdio",
-      "command": "npx",
-      "args": [ "-y", "@steipete/peekaboo-mcp" ]
-    },
+  "disabledMcpServers": {
     "playwright": {
       "command": "npx",
       "args": ["-y", "@playwright/mcp@latest"]
@@ -20,6 +10,18 @@
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
+    }
+  },
+  "mcpServers": {
+    "fetch": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [ "mcp-server-fetch" ]
+    },
+    "peekaboo": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [ "-y", "@steipete/peekaboo-mcp" ]
     },
     "cloudwatch": {
       "command": "uvx",
