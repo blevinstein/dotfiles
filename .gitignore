@@ -29,7 +29,8 @@
 
 # tools
 !tools
-!tools/*
+!tools/**
+tools/**/node_modules
 
 # setup
 !setup.sh

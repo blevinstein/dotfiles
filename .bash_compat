@@ -190,6 +190,20 @@ fi
 # Used for fixing copy/paste behavior when claude screws up a terminal
 alias fixpaste='printf "\e[?2004l"'
 
+# ~/tools launchers
+
+# Jira ticket creator (~/tools/new-ticket/)
+function new-ticket {
+  node ~/tools/new-ticket/index.js
+}
+
+# arborist: git worktree + tmux TUI (~/tools/arborist/)
+# reads $WORKTREE_HOME (set per-machine in ~/.bash_local) as the default parent
+# dir for new worktrees: $WORKTREE_HOME/<repo>/<branch>
+function arb {
+  node ~/tools/arborist/index.js "$@"
+}
+
 # Spin up a dedicated worktree and launch the cursor agent
 workagent() {
     local feature_name=$1
