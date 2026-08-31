@@ -127,6 +127,68 @@ Discovered via `GET /folders?fields=id,name,parent_id,is_shared_root,is_users_ro
 
 Fetch the current tree fresh when placing a new dashboard.
 
+## UDD gotchas learned the hard way
+
+The REST API for User-Defined Dashboards has several sharp edges that produce no error but silently don't do what you'd expect. Symptoms and fixes below.
+
+**Creating a tile**
+- `POST /dashboard_elements` — NOT nested under `/dashboards/{id}/dashboard_elements` (that 404s). Put `dashboard_id` in the request body instead.
+- `vis_config` must be set when creating the **query** (`POST /queries`), not when creating/patching the dashboard element. Setting it on the element silently no-ops. Symptom: tile shows "Element not found" in the dashboard UI, and "Visualization configuration not found" when you click for details.
+- New `dashboard_layout_components` are created with `row`/`column`/`width`/`height` all `null` — the tile won't be positioned on the grid. You must explicitly `PATCH /dashboard_layout_components/{id}` with all four values.
+- To swap a tile's data/vis after the fact: create a new query (`POST /queries`) with the fixed `fields`/`filters`/`vis_config`, then `PATCH /dashboard_elements/{id}` with `{"query_id": "<new id>"}`. This preserves the element's `result_maker`/`listen` filter wiring (see below) as long as you don't also touch `result_maker` in that PATCH.
+
+**Dynamic fields (`dynamic_fields` on a query)**
+- Custom dimensions must use Looker's Lexp functions, not raw SQL. Works: `extract_hours(${...})`, `diff_days(date(Y,M,D), ${...})`, `mod(a, b)`, `if(cond, a, b)` (chainable for a case-like expression). Fails with "Invalid expression: Unknown function" for raw SQL (`HOUR()`, `DAYNAME()`) and also for Lexp `list()`/`index()` (these don't compile to SQL in this context, even though they look valid as Lexp).
+- Custom filtered measures: `"filters"` must be a **dict** (`{"view.field": "value"}`), not a list of `{field, value}` objects — the list form is silently ignored (no filter applied).
+- **Table calculations silently evaluate to null with no error** if a field referenced via `${...}` in the expression isn't also present in the query's top-level `fields` array — even though the calc itself is a field. If you want a ratio like `${a}/${b}` but only want to chart the ratio, put `a`, `b`, and the calc all in `fields`, then hide `a`/`b` from the visual via `vis_config.hidden_fields`. (This bug caused 3 "silently blank" line-chart tiles in one session — always double check ${...} refs in a table_calc expression are all present in fields.)
+
+**`looker_grid` (table) `vis_config` — params that are valid per LookML dashboard docs but are silently ignored via the JSON API:**
+- `show_view_names: false` — no effect, repeated view-name header stays.
+- `column_order` — does not reorder pivot *value* columns; pivoted columns are always sorted alphabetically by value with no API-level override.
+- `series_labels` / `series_column_widths` keyed by a bare pivot value (e.g. `"0"`, `"Mon"`) — ignored.
+- `html` on a dynamic dimension — does not affect pivot column header rendering (only affects cell body rendering, and even that wasn't confirmed).
+- `color_application.{collection_id,palette_id}` inside a `conditional_formatting` rule — silently falls back to Looker's default blue scale.
+
+What **does** work, confirmed via render_tasks (see below):
+- `series_cell_visualizations.<view.field>.is_active: false` — removes the default in-cell bar/sparkline.
+- `series_labels` / `series_column_widths` keyed by the **real field name** (`view_name.field_name`) — e.g. renaming a measure's column header.
+- `size_to_fit: true` combined with resizing the tile's actual `dashboard_layout_component.width` — the only reliable way to control how many pivot columns fit without horizontal scroll. Explicit small `series_column_widths` values are ignored/floored.
+- Workaround for custom pivot column order (e.g. weekday Mon→Sun instead of alphabetical): make the pivoted dimension's *value* itself sort correctly, e.g. `"1 Mon"`, `"2 Tue"`, ... `"7 Sun"` — alphabetical string sort of these equals the desired order, and the leading digit is a minor readability cost.
+
+**Dashboard filters**
+- `POST /dashboard_filters`: `type` must be one of `date_filter`, `number_filter`, `string_filter`, `field_filter` — not `date`/`number`/`string` (the object-model docs are misleading here; trust the 422 validation error, which lists the exact accepted values).
+- To wire a tile to a dashboard filter: `PATCH /dashboard_elements/{id}` with:
+  ```json
+  {"result_maker": {"filterables": [{"model": "...", "view": "...", "listen": [
+    {"dashboard_filter_name": "date_filter", "field": "view_name.date_field"}
+  ]}]}}
+  ```
+  The same dashboard filter name can drive tiles across different explores by mapping to a different `field` per tile. Fetch the element first (`GET .../dashboard_elements/{id}?fields=result_maker`) if it already has other filters/listens you need to preserve — this PATCH replaces the whole `filterables` array.
+
+## Visually verify vis_config changes (render_tasks)
+
+Don't guess at `vis_config` behavior and ask the user to check the live dashboard each iteration — render the tile yourself and look at it. This was the single biggest time-saver once discovered.
+
+```bash
+# 1. Kick off a render (also works for /render_tasks/dashboards/{id}/png and /render_tasks/looks/{id}/png)
+TASK_ID=$(curl -sS --globoff -X POST -H "Authorization: token $LOOKER_TOKEN" \
+  -H "Content-Type: application/json" -d '{}' \
+  "$LOOKER_BASE_URL/api/4.0/render_tasks/queries/$QUERY_ID/png?width=650&height=800" | jq -r '.id')
+
+# 2. Poll until status is success/failure (typically enqueued_for_render -> querying -> success, ~10-30s)
+curl -sS --globoff -H "Authorization: token $LOOKER_TOKEN" \
+  "$LOOKER_BASE_URL/api/4.0/render_tasks/$TASK_ID" | jq -r '.status'
+
+# 3. Download the image once successful
+curl -sS --globoff -H "Authorization: token $LOOKER_TOKEN" \
+  "$LOOKER_BASE_URL/api/4.0/render_tasks/$TASK_ID/results" -o /tmp/preview.png
+```
+
+Then view `/tmp/preview.png` with an image-capable tool. This is how the `vis_config` quirks above were actually confirmed, instead of guessed at.
+
+- Rendering a `query_id` directly was reliable; rendering a `dashboard_element_id` directly failed once for no clear reason — prefer rendering the element's underlying `query_id`.
+- Use a `width`/`height` close to the tile's real on-dashboard pixel size when checking things like column fit/wrapping.
+
 ## LookML dashboards (this repo)
 
 If the user wants a dashboard that lives in the LookML project (as opposed to a UDD), edit `.dashboard.lookml` files instead of calling the API.
@@ -159,7 +221,7 @@ This is faster than grepping `views/**/*.view.lkml` and matches what Looker actu
 1. Ensure `LOOKER_BASE_URL` / `LOOKER_CLIENT_ID` / `LOOKER_CLIENT_SECRET` are set. Login and cache `LOOKER_TOKEN`.
 2. Confirm intent: **LookML dashboard** (edit files in this repo, git-based) or **UDD** (REST API against the instance).
 3. Discover context via API: relevant model → explore → available fields; target folder ID; existing dashboards to reference.
-4. For UDDs: build up with `POST /dashboards`, then `POST /dashboards/{id}/dashboard_elements` (each element usually references a `query_id` from `POST /queries`), then `.../dashboard_filters` and layout components.
+4. For UDDs: build up with `POST /dashboards`, then `POST /queries` (with `vis_config`) for each tile's data, then `POST /dashboard_elements` (body includes `dashboard_id` and `query_id` — not a nested path), then `PATCH /dashboard_layout_components/{id}` to position it, then `.../dashboard_filters` + `listen` wiring if needed. See "UDD gotchas learned the hard way" below for the traps in this flow.
 5. For LookML dashboards: write/edit the `.dashboard.lookml` file, referencing existing views/explores in the repo; open a PR; deploy via Looker.
 6. Prefer sparse fieldsets (`?fields=...`) on all reads to keep responses reviewable.
 7. Read `422` error bodies fully — they tell you exactly which field failed validation.
