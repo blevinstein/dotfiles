@@ -95,3 +95,4 @@ policy.
 | Recognised command, denied (exit 77) | Stop and tell the user |
 | Unrecognised command or exit 78 | Retry without `vet` prefix |
 | Daemon not running | Exit 78; retry without prefix |
+| `vet curl` seems to hang | Run `vet daemon list`; if approval is pending, wait — do not kill the process |
