@@ -53,6 +53,25 @@ vet curl https://api.example.com/data
 The exit code, stdout, and stderr are identical to running the command
 directly when allowed. Nothing about your argument syntax changes.
 
+## If a `vet curl` invocation appears to hang
+
+`vet` may pop up an approval dialog for the user and then block until
+they respond. This can look identical to a hung process, especially if
+the user is away from the keyboard.
+
+- **Do NOT kill the process** just because it hasn't returned yet.
+  Killing it abandons a pending approval and trains the user to ignore
+  future prompts, or forces them to re-approve a command that already
+  looked handled.
+- Before assuming something is stuck, run `vet daemon list` to check
+  for a pending approval on this command.
+  - If there is a pending approval: wait for the user to respond. Tell
+    the user a `vet` approval is awaiting their input instead of
+    working around it.
+  - If there is no pending approval (and the command still isn't
+    returning), then it's reasonable to treat it as a genuine hang and
+    investigate/kill it as you normally would.
+
 ## What to do if `vet` errors
 
 `vet` exits **78** (config error) when it cannot parse the command or
