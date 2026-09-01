@@ -115,6 +115,7 @@ For each task, follow the linked doc for exact request/response schemas.
 | Create/get query (data behind a tile) | `POST /queries`, `GET /queries/{id}`, `POST /queries/{id}/run/{format}` — [Query](https://cloud.google.com/looker/docs/reference/looker-api/latest/methods/Query) |
 | Import a LookML dashboard → UDD | `POST /import_lookml_dashboard/{lookml_dashboard_id}/{space_id}` |
 | Sync UDDs from LookML changes | `POST /sync_lookml_dashboard/{lookml_dashboard_id}` |
+| Export a UDD as LookML | `GET /dashboards/lookml/{id}` — [dashboard_lookml](https://cloud.google.com/looker/docs/reference/looker-api/latest/methods/Dashboard/dashboard_lookml) |
 | LookML project + git branch mgmt | [Project](https://cloud.google.com/looker/docs/reference/looker-api/latest/methods/Project) |
 
 ### Local reference: known folder IDs on this instance
@@ -197,6 +198,38 @@ If the user wants a dashboard that lives in the LookML project (as opposed to a 
 - Element (tile) params: https://cloud.google.com/looker/docs/reference/param-element
 
 Deployment path (Looker-side): commit + push on a Looker dev branch, then use Looker's **Validate LookML** + **Deploy to Production** flow (either via the Looker UI or the [Project](https://cloud.google.com/looker/docs/reference/looker-api/latest/methods/Project) endpoints). No REST `POST` creates the dashboard — LookML dashboards are code-defined.
+
+### Converting a UDD prototype into a permanent LookML dashboard
+
+If a UDD was built via the API (e.g. as a fast prototype) and now needs to become
+a checked-in `.dashboard.lookml` file, don't hand-translate every tile — export it:
+
+    GET /dashboards/lookml/{dashboard_id}
+
+Returns `{"dashboard_id": ..., "lookml": "<full yaml text>"}`. This round-trips
+exactly with what the Looker UI's own "Get LookML" UDD export produces, including
+`dynamic_fields`, `listen` filter wiring, layout `row`/`col`/`width`/`height`, and
+the dashboard-level `filters:` block — no manual reconstruction needed.
+
+```bash
+curl -sS --globoff -H "Authorization: token $LOOKER_TOKEN" \
+  "$LOOKER_BASE_URL/api/4.0/dashboards/lookml/$DASHBOARD_ID" | jq -r '.lookml' > new_dashboard.lookml
+```
+
+Before checking in:
+- Rename the `dashboard:` id and `title:` if the new permanent dashboard should
+  have a different name than the source UDD (e.g. prototyped inside an existing
+  dashboard, promoted under its own name).
+- Drop the `preferred_slug:` line — it's the old UDD's slug; let Looker mint a
+  fresh one for the new LookML dashboard on first deploy.
+- Save as `dashboards/<name>.dashboard.lookml`. Check the relevant
+  `models/*.model.lkml` for an `include: "/dashboards/*.dashboard*"` (or similar
+  glob) — if present, the file is picked up automatically with no other wiring.
+
+Known limitation (per Looker's public forum): this call can fail with "dashboard
+contains query or look elements with more than one filterables_listen" if a tile
+listens to more than one dashboard filter. Didn't hit this here (each tile had
+exactly one `listen`), but worth knowing if it 400s.
 
 ### Introspection helpers when authoring
 
