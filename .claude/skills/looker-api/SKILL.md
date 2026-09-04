@@ -95,6 +95,43 @@ Parse with `jq`. Fall back to `python3 -c "import sys,json; ..."` only if `jq` i
 - Errors: `422` (validation) responses include a per-field `errors` array — always read the body, don't just check the status.
 - Rate limits: honor `X-RateLimit-*` response headers; back off on 429.
 
+## SQL Runner (ad-hoc SQL against a connection)
+
+Useful for validating a LookML derived-table SQL block (or a dbt model's
+rendered SQL) directly against the warehouse before wiring it into LookML —
+much faster than round-tripping through full LookML validation, and it
+exercises real data (catches join fan-out, unexpected nulls, etc. that code
+review alone won't).
+
+```bash
+SQL='SELECT ...'
+BODY=$(jq -n --arg sql "$SQL" '{connection_name:"snowflake-qa", sql:$sql}')
+SLUG=$(curl -sS --globoff -X POST -H "Authorization: token $LOOKER_TOKEN" \
+  -H "Content-Type: application/json" -d "$BODY" \
+  "$LOOKER_BASE_URL/api/4.0/sql_queries" | jq -r '.slug')
+curl -sS --globoff -X POST -H "Authorization: token $LOOKER_TOKEN" \
+  "$LOOKER_BASE_URL/api/4.0/sql_queries/$SLUG/run/json" | jq .
+```
+
+Prefer `scripts/sql_runner.sh` in this skill folder over hand-writing the
+above — it handles the expired-token gotcha below automatically:
+
+```bash
+echo "$SQL" | /Users/blevinstein/.claude/skills/looker-api/scripts/sql_runner.sh snowflake-qa -
+```
+
+Gotchas:
+
+- `connection_name` is the Looker connection id (e.g. `snowflake-qa`), not a database/schema name.
+- **Check the create response before chaining.** If `LOOKER_TOKEN` expired, `POST /sql_queries`
+  returns `{"message": "Requires authentication."}` with no `slug` field — `jq -r '.slug'` silently
+  yields the string `"null"`, and the follow-up run call fails against `/sql_queries/null/run/json`
+  with a confusing, unrelated-looking error instead of an auth error. Re-`login` and retry if `slug`
+  comes back empty/`null`.
+- To discover which tables a connection/schema actually exposes: `GET /connections/{name}/tables?schema_name={schema}` —
+  NOT `/connections/{name}/databases` (404s). The response is a **single-element array**; the table
+  list is at `.[0].tables[].name`, not top-level.
+
 ## Task-oriented endpoint map
 
 For each task, follow the linked doc for exact request/response schemas.
@@ -248,6 +285,19 @@ curl -sS --globoff \
 ```
 
 This is faster than grepping `views/**/*.view.lkml` and matches what Looker actually exposes at query time.
+
+### Snowflake SQL gotchas when authoring derived-table / dimension SQL
+
+- A correlated **scalar** subquery with `ORDER BY ... LIMIT 1` fails with
+  `Unsupported subquery type cannot be evaluated`. For "value from the row
+  with the latest/greatest order column, per group" (e.g. "this case's most
+  recent reviewer"), use `MAX_BY(value_col, order_col)` instead — a correlated
+  *aggregate* subquery, which Snowflake supports fine:
+  ```sql
+  (SELECT MAX_BY(r."REVIEWER_ID", r."FINISHED_AT")
+   FROM "SCHEMA"."TABLE" r
+   WHERE r."CASE_ID" = ${TABLE}."CASE_ID" AND r."STAGE" = 'SECOND_REVIEW') 
+  ```
 
 ## Workflow
 
