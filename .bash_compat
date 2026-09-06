@@ -157,6 +157,11 @@ alias tn="tmux new-window -t"
 # NOTE: "Ctrl-A x" to kill a single pane
 alias tkill="tmux kill-session -t"
 
+# dump full tmux pane scrollback to a file (~/tools/save-pane.sh)
+function tsave {
+  ~/tools/save-pane.sh "$@"
+}
+
 # Prints a comma-delimited list
 function comma() {
   local IFS=,
