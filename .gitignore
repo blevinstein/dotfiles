@@ -43,7 +43,18 @@ tools/**/node_modules
 .claude/skills/peon-ping-*/**
 # folder used by codex for configuration
 .claude/skills/.system
+!.claude/rules
+!.claude/rules/**
 
+# cursor
+!.cursor
+.cursor/projects/
+.cursor/skills-cursor/
+.cursor/plugins/
+!.cursor/rules
+!.cursor/rules/**
+
+# codex
 # this is a symlink to .claude/skills so that codex gets the same skills
 !.codex
 !.codex/skills/
