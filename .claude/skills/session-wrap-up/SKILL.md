@@ -1,7 +1,6 @@
 ---
 name: session-wrap-up
 description: Memorialize learnings from the current session — what failed, what the user had to correct, what worked well, and what reusable artifacts were built. Use when the user says "wrap up", "end of session", "summarize learnings", "memorialize this session", or wants to capture session knowledge before closing.
-disable-model-invocation: true
 ---
 
 # Session Wrap-Up
