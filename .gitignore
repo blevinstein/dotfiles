@@ -48,9 +48,10 @@ tools/**/node_modules
 
 # cursor
 !.cursor
-.cursor/projects/
-.cursor/skills-cursor/
-.cursor/plugins/
+.cursor/projects
+.cursor/skills-cursor
+.cursor/plugins
+.cursor/plans
 !.cursor/rules
 !.cursor/rules/**
 
