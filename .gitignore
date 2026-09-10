@@ -60,3 +60,8 @@ tools/**/node_modules
 !.codex
 !.codex/skills/
 
+# gemini/antigravity
+!.gemini
+!.gemini/config
+!.gemini/config/skills.json
+!.gemini/config/AGENTS.md
