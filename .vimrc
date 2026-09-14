@@ -1,5 +1,9 @@
 set nocompatible
 
+" Auto-reload file when changed on disk (e.g. by AI agent)
+set autoread
+autocmd FocusGained,BufEnter * checktime
+
 " Pathogen
 "runtime bundle/vim-pathogen/autoload/pathogen.vim
 "let g:pathogen_disabled = []
@@ -14,6 +18,7 @@ Plug 'csexton/trailertrash.vim'
 Plug 'bkad/CamelCaseMotion'
 Plug 'wellle/context.vim'
 Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
 
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
@@ -186,6 +191,21 @@ autocmd FileType javascript       let b:comment_leader = '// '
 
 " Shortcut for trailertrash.vim
 noremap <leader>tt :TrailerTrim<CR>
+
+" GitGutter configuration
+let g:gitgutter_highlight_lines = 1
+
+" GitGutter shortcuts for reviewing agent changes
+noremap <leader>gl :GitGutterLineHighlightsToggle<CR>
+noremap <leader>gf :GitGutterFold<CR>
+nmap ]g <Plug>(GitGutterNextHunk)
+nmap [g <Plug>(GitGutterPrevHunk)
+nmap <leader>gs <Plug>(GitGutterStageHunk)
+nmap <leader>gu <Plug>(GitGutterUndoHunk)
+nmap <leader>gp <Plug>(GitGutterPreviewHunk)
+noremap <leader>gq :GitGutterQuickFix<CR>:copen<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprev<CR>
 
 " Shortcut for CamelCaseMotion
 let g:camelcasemotion_key = ","

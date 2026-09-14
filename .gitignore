@@ -22,7 +22,10 @@
 !.screenrc
 !.tmux.conf
 !.tmux/plugins
-!.vim/bundle
+!.vim
+!.vim/plugged
+!.vim/plugged/vim-gitgutter
+!.vim/plugged/vim-gitgutter/**
 !.vimrc
 
 !Readme.md
