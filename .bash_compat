@@ -239,3 +239,43 @@ workagent() {
     "$agent"
     popd
 }
+
+# CloudCLI (Claude Code / Cursor CLI / Codex web UI), loopback-only on :3001
+# Relies on lsof to find the listening pid, which ships by default on macOS
+# but not on every Linux distro/container base image.
+# TODO(linux): confirm `lsof` is present on target linux hosts; install via
+# `apt install lsof` / `apk add lsof` / `dnf install lsof` if the guard below
+# ever fires there.
+function cloudcli-start {
+  if ! command -v lsof >/dev/null 2>&1; then
+    echo "cloudcli-start needs 'lsof' on PATH (not found)."
+    return 1
+  fi
+  if lsof -iTCP:3001 -sTCP:LISTEN -n -P -t >/dev/null 2>&1; then
+    echo "cloudcli already running on http://127.0.0.1:3001 (pid $(lsof -iTCP:3001 -sTCP:LISTEN -n -P -t))"
+    return 0
+  fi
+  HOST=127.0.0.1 nohup cloudcli --port 3001 > /tmp/cloudcli.log 2>&1 &
+  disown
+  echo "cloudcli starting on http://127.0.0.1:3001 (pid $!) — logs: /tmp/cloudcli.log"
+}
+
+function cloudcli-stop {
+  if ! command -v lsof >/dev/null 2>&1; then
+    echo "cloudcli-stop needs 'lsof' on PATH (not found)."
+    return 1
+  fi
+  local pid
+  pid=$(lsof -iTCP:3001 -sTCP:LISTEN -n -P -t 2>/dev/null)
+  if [ -z "$pid" ]; then
+    echo "cloudcli is not running"
+    return 0
+  fi
+  kill "$pid" && echo "stopped cloudcli (pid $pid)"
+}
+
+function cloudcli-restart {
+  cloudcli-stop
+  sleep 1
+  cloudcli-start
+}
