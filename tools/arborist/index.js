@@ -6,6 +6,7 @@ import React from 'react';
 import { render } from 'ink';
 import App from './src/App.js';
 import { isGitRepo } from './src/git.js';
+import { restoreTerminal } from './src/tmux.js';
 
 const cwd = process.cwd();
 
@@ -31,5 +32,6 @@ try {
 }
 
 if (pending) {
+  restoreTerminal();
   await pending();
 }

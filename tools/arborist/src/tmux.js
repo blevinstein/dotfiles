@@ -1,5 +1,19 @@
-import { spawnSync, spawn } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { basename } from 'node:path';
+
+export function restoreTerminal() {
+  if (process.stdin.isTTY && typeof process.stdin.setRawMode === 'function') {
+    process.stdin.setRawMode(false);
+  }
+  process.stdin.pause();
+  process.stdin.removeAllListeners();
+  if (typeof process.stdin.unref === 'function') {
+    process.stdin.unref();
+  }
+  if (process.stdout.isTTY) {
+    process.stdout.write('\x1b[?25h\x1b[?1000l\x1b[?1002l\x1b[?1003l\x1b[?1006l\x1b[?2004l');
+  }
+}
 
 export function tmuxInstalled() {
   const r = spawnSync('tmux', ['-V'], { stdio: ['ignore', 'pipe', 'pipe'] });
@@ -38,29 +52,27 @@ export function ensureSession(name, path) {
 // - Otherwise: new-session -A (attach or create) with stdio inherited.
 // Returns a Promise that resolves when the tmux process exits.
 export function attachOrCreate(name, path) {
-  return new Promise((resolveP, rejectP) => {
-    if (insideTmux()) {
-      const ensured = ensureSession(name, path);
-      if (!ensured.ok) {
-        rejectP(new Error(`failed to create tmux session: ${ensured.stderr.trim()}`));
-        return;
-      }
-      const r = spawnSync('tmux', ['switch-client', '-t', name], {
-        stdio: ['ignore', 'pipe', 'pipe'],
-        encoding: 'utf8',
-      });
-      if (r.status !== 0) {
-        rejectP(new Error(`tmux switch-client failed: ${(r.stderr ?? '').trim()}`));
-        return;
-      }
-      resolveP({ code: 0 });
-      return;
+  if (insideTmux()) {
+    const ensured = ensureSession(name, path);
+    if (!ensured.ok) {
+      throw new Error(`failed to create tmux session: ${ensured.stderr.trim()}`);
     }
-
-    const child = spawn('tmux', ['new-session', '-A', '-s', name, '-c', path], {
-      stdio: 'inherit',
+    const r = spawnSync('tmux', ['switch-client', '-t', name], {
+      stdio: ['ignore', 'pipe', 'pipe'],
+      encoding: 'utf8',
     });
-    child.on('error', rejectP);
-    child.on('exit', code => resolveP({ code: code ?? 0 }));
+    if (r.status !== 0) {
+      throw new Error(`tmux switch-client failed: ${(r.stderr ?? '').trim()}`);
+    }
+    return { code: 0 };
+  }
+
+  restoreTerminal();
+
+  const r = spawnSync('tmux', ['new-session', '-A', '-s', name, '-c', path], {
+    stdio: 'inherit',
   });
+
+  if (r.error) throw r.error;
+  return { code: r.status ?? 0 };
 }
