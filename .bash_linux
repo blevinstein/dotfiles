@@ -18,8 +18,6 @@ shopt -s globstar
 # add detail and color to ls
 alias ls="ls -AlL --color=auto"
 alias grep="grep --color=auto"
-# 256 colors
-export TERM='xterm-256color'
 # http://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator
 stty -ixon
 # allow escape sequences
@@ -81,4 +79,10 @@ function scan-ports {
     if [ -n "$pid" ]; then echo "$port used by process $pid"; fi
   done
 }
+
+# disable starship on nobara linux
+if [[ -n "$STARSHIP_SHELL" ]]; then
+  PROMPT_COMMAND=${PROMPT_COMMAND//starship_precmd/}
+  unset -f starship_precmd starship_preexec 2>/dev/null
+fi
 
