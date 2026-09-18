@@ -48,6 +48,10 @@ tools/**/node_modules
 .claude/skills/.system
 !.claude/rules
 !.claude/rules/**
+# hooks config; note peon-ping's own entries use machine-specific absolute
+# paths written by its installer, so they won't transfer verbatim to a
+# fresh machine -- rerun the peon-ping installer there to regenerate them
+!.claude/settings.json
 
 # cursor
 !.cursor
@@ -57,6 +61,9 @@ tools/**/node_modules
 .cursor/plans
 !.cursor/rules
 !.cursor/rules/**
+!.cursor/hooks.json
+!.cursor/hooks
+!.cursor/hooks/**
 
 # codex
 # this is a symlink to .claude/skills so that codex gets the same skills

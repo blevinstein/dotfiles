@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "hooks": {
+    "stop": [
+      { "command": "./hooks/peon-notify.sh Stop", "timeout": 5 },
+      { "command": "../tools/agent-tmux-bell.sh", "timeout": 5 }
+    ],
+    "preToolUse": [
+      { "command": "./hooks/peon-notify.sh PermissionRequest", "timeout": 5 },
+      { "command": "../tools/agent-tmux-bell.sh", "timeout": 5 }
+    ],
+    "beforeShellExecution": [
+      { "command": "./hooks/peon-notify.sh PermissionRequest", "timeout": 5 },
+      { "command": "../tools/agent-tmux-bell.sh", "timeout": 5 }
+    ],
+    "beforeMCPExecution": [
+      { "command": "./hooks/peon-notify.sh PermissionRequest", "timeout": 5 },
+      { "command": "../tools/agent-tmux-bell.sh", "timeout": 5 }
+    ]
+  }
+}
