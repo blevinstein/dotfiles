@@ -28,5 +28,9 @@ if they conflict with anything here.
   inaccurate, or you are replacing them with something better (more informative, more concise, etc)
 - Comments should never refer to bug numbers, except in the context of a TODO item.
 - Comments may provide permanent links to confluence or other documentation for reference.
+- Comments must describe the code as it exists after the change — never the transition that
+  produced it. Avoid changelog-style framing ("Today's X…", "unlike before…", "rather than the
+  old bespoke…", "now we…"). Write what the code does and why, as if the prior implementation
+  never existed.
 
 

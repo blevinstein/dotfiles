@@ -66,6 +66,8 @@ independent and the user agrees.
 When the subagent returns:
 
 1. Inspect the diff (`git status`, `git diff`, and any tests the subagent ran).
+   If a background subagent errors or stalls on resume (e.g. after a disconnect),
+   inspect the working tree before re-dispatching — the work may already be done.
 2. Check the work against the task's acceptance criteria.
 3. Note defects, missing tests, scope creep, or convention violations.
 4. Filter the subagent's session-wrap-up output down to **valuable**
