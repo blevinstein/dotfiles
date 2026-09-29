@@ -47,11 +47,13 @@ Selecting an existing worktree opens an action menu:
 Selecting `+ New worktree` walks you through:
 
 1. Branch name (existing or new)
-2. Path — defaults to `$WORKTREE_HOME/<repo>/<branch>`
-3. Confirm → `git worktree add [-b] <path> <branch>`
-
-If the branch doesn't exist locally, it's created from the current `HEAD` of the
-repo you launched `arb` from.
+2. Base branch — only asked when the branch doesn't exist yet. Choose:
+   - the repo's default branch (`main`/`master`, detected via `origin/HEAD` or a
+     local `main`/`master` branch)
+   - the current branch (of the repo you launched `arb` from)
+   - "Enter other..." to type any branch, tag, or commit-ish
+3. Path — defaults to `$WORKTREE_HOME/<repo>/<branch>`
+4. Confirm → `git worktree add [-b <branch> [<base>]] <path> <branch>`
 
 ## Keybindings
 
@@ -82,6 +84,5 @@ using [htm](https://github.com/developit/htm) for JSX-like syntax without a buil
 ## Notes / non-goals
 
 - No fuzzy search (arrow keys only).
-- New branches are always based on `HEAD` of the repo you launched from.
 - No worktree pruning UI — run `git worktree prune` manually.
 - No tests.

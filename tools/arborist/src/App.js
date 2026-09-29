@@ -16,10 +16,12 @@ import {
   branchExists,
   checkoutBranch,
   currentBranch,
+  defaultBranch,
   deleteBranch,
   hasUncommitted,
   isSameRepo,
   parseWorktrees,
+  refExists,
   removeWorktree,
   repoToplevel,
 } from './git.js';
@@ -162,8 +164,8 @@ export default function App({ cwd, setPending }) {
     setScreen('result');
   };
 
-  const runCreate = ({ branch, path, createBranch }) => {
-    const res = addWorktree({ path, branch, createBranch }, cwd);
+  const runCreate = ({ branch, path, createBranch, base }) => {
+    const res = addWorktree({ path, branch, createBranch, base }, cwd);
     if (!res.ok) {
       setResult({
         ok: false,
@@ -173,9 +175,12 @@ export default function App({ cwd, setPending }) {
       setScreen('result');
       return;
     }
+    const title = createBranch && base
+      ? `Created worktree at ${path} on ${branch} (from ${base})`
+      : `Created worktree at ${path} on ${branch}`;
     setResult({
       ok: true,
-      title: `Created worktree at ${path} on ${branch}`,
+      title,
       lines: [
         res.stdout.trim(),
         `Run \`arb\` again to open it in tmux.`,
@@ -246,7 +251,10 @@ export default function App({ cwd, setPending }) {
     return React.createElement(NewWorktree, {
       defaultParent: parent,
       repoName,
+      defaultBranchName: defaultBranch(cwd),
+      currentBranchName: currentBranch(cwd),
       branchExistsFn: b => branchExists(b, cwd),
+      refExistsFn: r => refExists(r, cwd),
       onCancel: () => setScreen('list'),
       onCreate: runCreate,
     });

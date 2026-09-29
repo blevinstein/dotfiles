@@ -117,6 +117,24 @@ export function listLocalBranches(cwd = process.cwd()) {
   return r.stdout.split('\n').map(s => s.trim()).filter(Boolean);
 }
 
+// The repo's default branch: the remote's HEAD symlink if one is configured,
+// otherwise a local "main" or "master" branch. Returns null if none is found.
+export function defaultBranch(cwd = process.cwd()) {
+  const remote = runGit(['symbolic-ref', '--short', 'refs/remotes/origin/HEAD'], { cwd });
+  if (remote.ok) {
+    const ref = remote.stdout.trim();
+    return ref.startsWith('origin/') ? ref.slice('origin/'.length) : ref;
+  }
+  if (branchExists('main', cwd)) return 'main';
+  if (branchExists('master', cwd)) return 'master';
+  return null;
+}
+
+// Check whether a ref (branch, tag, or other commit-ish) resolves to a commit.
+export function refExists(ref, cwd = process.cwd()) {
+  return runGit(['rev-parse', '--verify', '--quiet', `${ref}^{commit}`], { cwd }).ok;
+}
+
 export function addWorktree({ path, branch, createBranch, base }, cwd = process.cwd()) {
   const args = ['worktree', 'add'];
   if (createBranch) {
