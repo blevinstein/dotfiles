@@ -227,7 +227,7 @@ Then view `/tmp/preview.png` with an image-capable tool. This is how the `vis_co
 - Rendering a `query_id` directly was reliable; rendering a `dashboard_element_id` directly failed once for no clear reason — prefer rendering the element's underlying `query_id`.
 - Use a `width`/`height` close to the tile's real on-dashboard pixel size when checking things like column fit/wrapping.
 
-## LookML dashboards (this repo)
+## LookML dashboards
 
 If the user wants a dashboard that lives in the LookML project (as opposed to a UDD), edit `.dashboard.lookml` files instead of calling the API.
 
@@ -235,6 +235,35 @@ If the user wants a dashboard that lives in the LookML project (as opposed to a 
 - Element (tile) params: https://cloud.google.com/looker/docs/reference/param-element
 
 Deployment path (Looker-side): commit + push on a Looker dev branch, then use Looker's **Validate LookML** + **Deploy to Production** flow (either via the Looker UI or the [Project](https://cloud.google.com/looker/docs/reference/looker-api/latest/methods/Project) endpoints). No REST `POST` creates the dashboard — LookML dashboards are code-defined.
+
+### Validating LookML on a branch via the API (no UI needed)
+
+If your repo has no local LookML linter, validation is server-side. After
+pushing commits to a branch, confirm they're clean via the API instead of
+waiting on the Looker UI's Validate LookML button:
+
+1. Login (see Credentials above).
+2. `PATCH /session` with `{"workspace_id":"dev"}` -- dev workspace is
+   required before you can switch git branches or validate.
+3. `PUT /projects/{project_id}/git_branch` with `{"name":"<branch>"}` to
+   check out the branch. If you don't know the project id, `GET
+   /projects?fields=id,git_remote_url` and match on the repo's git remote --
+   worth noting down once if you'll be working against the same repo/project
+   repeatedly.
+4. `POST /projects/{project_id}/reset_to_remote` to sync Looker's copy of
+   that branch to what's on the remote (i.e. what was just pushed). DANGER:
+   discards any unpushed changes in Looker's own dev workspace for that
+   branch.
+5. `POST /projects/{project_id}/validate` and check `errors: []` in the
+   response.
+
+Prefer `scripts/validate_lookml.sh <project_id> <branch>` over hand-writing
+the above.
+
+Gotcha: every write-method call above (`PATCH`/`PUT`/`POST`) triggered a
+`vet curl` manual approval popover in this environment, each taking anywhere
+from ~15s to ~160s to be approved. Don't assume the shell is hung -- poll
+with a generous timeout rather than a short one.
 
 ### Converting a UDD prototype into a permanent LookML dashboard
 
@@ -298,6 +327,27 @@ This is faster than grepping `views/**/*.view.lkml` and matches what Looker actu
    FROM "SCHEMA"."TABLE" r
    WHERE r."CASE_ID" = ${TABLE}."CASE_ID" AND r."STAGE" = 'SECOND_REVIEW') 
   ```
+
+### LookML `fields` param gotchas
+
+- `ALL_FIELDS*` (the built-in "everything in this explore" set) can only be
+  used in the **explore**-level `fields` param, not inside a `join` block's
+  `fields` param — using it inside a join fails with `Could not find a set
+  named "ALL_FIELDS"`. Join-level `fields` only accepts an explicit list of
+  includes (or `fields: []` to drop everything from that join).
+- To exclude a handful of fields brought in by a join (e.g. a measure that
+  filters on a view not joined into every explore that includes the base
+  view), exclude them at the **explore** level instead, with fully-scoped
+  names:
+  ```
+  explore: orders {
+    fields: [ALL_FIELDS*, -customer.risky_measure]
+    join: customer { ... }
+  }
+  ```
+- Explore-level `fields` entries must be fully scoped (`view_name.field_name`),
+  unlike join-level `fields`, which are bare field names relative to the
+  joined view.
 
 ## Workflow
 
