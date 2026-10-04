@@ -42,6 +42,7 @@ tools/**/node_modules
 !.claude/
 !.claude/skills/
 !.claude/skills/**
+.claude/skills/synced/
 # installed by peon-ping https://github.com/PeonPing/peon-ping
 .claude/skills/peon-ping-*/**
 # folder used by codex for configuration
