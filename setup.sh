@@ -1,5 +1,8 @@
+#!/usr/bin/env bash
 
 set -e
+
+./install-packages.sh
 
 git submodule init
 git submodule update
