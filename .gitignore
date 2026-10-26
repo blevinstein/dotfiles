@@ -81,3 +81,8 @@ tools/**/node_modules
 !.gemini/config
 !.gemini/config/skills.json
 !.gemini/config/AGENTS.md
+
+# iterm2
+!.config
+!.config/iterm2-prefs
+!.config/iterm2-prefs/com.googlecode.iterm2.plist

@@ -15,6 +15,10 @@ if [[ "$(uname)" == Darwin ]]; then
   # ssh client and server ship with macOS
   brew install "${COMMON[@]}" node sqlite vim uv
 
+  # iTerm2 reads its settings from the dotfiles repo; run before first launch
+  defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.config/iterm2-prefs"
+  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+
 elif command -v apt-get >/dev/null; then
   sudo apt-get update
   sudo apt-get install -y "${COMMON[@]}" \
