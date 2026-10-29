@@ -15,9 +15,16 @@ findings to a new Notion page under the private "Explorations" page.
   read, and git. Read-only unless the user asks otherwise.
 - **Notion** (`user-Notion` MCP): `notion-search`, `notion-fetch`,
   `notion-query-data-sources`. Read-only except for the output page.
-- **Linear** (`plugin-linear-linear` MCP): issues, projects, documents,
-  comments. If the namespace reports `needsAuth`, call `mcp_auth` through
-  `CallDynamicTool`, then re-inspect it.
+- **Linear** (`Linear` MCP): issues, projects, documents, comments.
+  Configured 2026-10-29 as a plain MCP server at user scope
+  (`~/.config/devin/mcp_config.json`), pointing at
+  `https://mcp.linear.app/mcp` and OAuth-authenticated via
+  `devin mcp login Linear`. To re-auth: `devin mcp logout Linear` then
+  `devin mcp login Linear`. (`devin mcp add` triggers the OAuth flow
+  automatically on add.)
+  - Tool param quirks: `get_issue` takes `id` (e.g. `"FBR-1710"`),
+    `list_comments` takes `issueId`, and `list_issues` `fields` uses
+    `status`/`statusType` (not `state`).
 
 Use `GetDynamicTools` to read a tool's schema before calling it as necessary.
 
