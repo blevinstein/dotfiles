@@ -1,6 +1,6 @@
 ---
 name: explore-function
-description: Investigate a question across local repos, Notion, and Linear, and write up findings as a new page in the user's private Notion "Explorations" page. Use when the user invokes /explore-function or asks to explore, investigate, or write up notes on a topic across those sources.
+description: Investigate a question across local repos, Notion, Linear, Slack, and (when relevant) Datadog, and write up findings as a new page in the user's private Notion "Explorations" page. Use when the user invokes /explore-function or asks to explore, investigate, or write up notes on a topic across those sources.
 user_invocable: true
 ---
 
@@ -25,6 +25,41 @@ findings to a new Notion page under the private "Explorations" page.
   - Tool param quirks: `get_issue` takes `id` (e.g. `"FBR-1710"`),
     `list_comments` takes `issueId`, and `list_issues` `fields` uses
     `status`/`statusType` (not `state`).
+- **Slack** (`plugin-slack-slack` MCP): messages, channels, users, threads,
+  and files via the Cursor Slack plugin (local MCP). Read-only for
+  explorations — search and read only; do not send, schedule, react, or
+  otherwise write unless the user explicitly asks.
+  - Prefer `slack_search_public` for public-channel search (no consent
+    needed). Use `slack_search_public_and_private` only when private
+    channels / DMs are needed, and only after user consent.
+  - Also useful: `slack_search_channels`, `slack_search_users`,
+    `slack_read_channel`, `slack_read_thread`, `slack_read_user_profile`.
+  - Search params: split into `keywords` (AND'd single words or
+    `"quoted phrases"`), `filters` (Slack modifiers like
+    `in:<#C…>` / `from:<@U…>` / `after:YYYY-MM-DD`), and
+    `natural_language_query` for semantic reranking. Decompose complex
+    questions into parallel searches; broaden if zero hits.
+  - If the Slack MCP skill (`slack-search`) is available, follow it for
+    search strategy.
+- **Datadog** (`plugin-datadog-datadog` MCP): logs, spans/traces, metrics,
+  monitors, incidents, dashboards, RUM, and events via the Cursor Datadog
+  plugin (local MCP). Use **only when appropriate** — production/ops
+  behavior, errors, latency, incidents, monitor state, deploys, or other
+  telemetry evidence. Skip for pure product/docs/process questions with no
+  runtime angle. Read-only for explorations — search and read only; do not
+  create/edit notebooks or dashboards unless the user explicitly asks.
+  - Before domain queries: `list_datadog_skills` (fuzzy topic) and
+    `load_datadog_skill` (e.g. `datadog/logs`, `datadog/traces`,
+    `datadog/metrics`, `datadog/monitors`); also load
+    `datadog/visualizations` when charting.
+  - Useful reads: `search_datadog_logs` / `analyze_datadog_logs`,
+    `search_datadog_spans` / `aggregate_spans` / `get_datadog_trace`,
+    `search_datadog_metrics` / `get_datadog_metric`,
+    `search_datadog_monitors`, `search_datadog_incidents` /
+    `get_datadog_incident`, `search_datadog_events` /
+    `get_change_stories`, `search_datadog_dashboards`.
+  - Prefer MCP over the REST `datadog-api` skill when this server is
+    available; fall back to that skill only if MCP cannot answer.
 
 Use `GetDynamicTools` to read a tool's schema before calling it as necessary.
 
@@ -47,8 +82,9 @@ content. Put the title in `properties`, not in the content.
 1. Clarify the question only if it is genuinely ambiguous.
 2. Gather evidence from each relevant source. Run independent lookups in parallel.
 3. Create the Notion page with: the question, a short summary of findings, and
-   supporting detail with links to the source Notion pages, Linear issues, and
-   repo paths. Mark clearly what is fact versus inference, and list open
+   supporting detail with links to the source Notion pages, Linear issues,
+   Slack messages/channels, Datadog queries/incidents/monitors (when used),
+   and repo paths. Mark clearly what is fact versus inference, and list open
    questions.
 4. Reply with the page link and a brief summary of the findings.
 
