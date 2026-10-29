@@ -14,3 +14,8 @@ curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
 cp -Rv ./.* $HOME/
 cp -Rv ./* $HOME/
 
+# install deps for each node tool
+for lockfile in $HOME/tools/*/package-lock.json; do
+  (cd "$(dirname "$lockfile")" && npm ci)
+done
+
